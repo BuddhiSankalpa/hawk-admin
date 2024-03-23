@@ -43,3 +43,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Nx-related files to ignore
+.nx/node_modules/
+.nx/dist/
+.nx/.cache/
+.nx/.angular/
+.nx/temp/
