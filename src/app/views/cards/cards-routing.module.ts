@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {CardsComponent} from "./cards.component";
+import {MoreDetailsComponent} from "./more-details/more-details.component";
 
 const routes: Routes = [
   {
@@ -19,7 +20,14 @@ const routes: Routes = [
         component: CardsComponent,
         data: {
           title: 'Card',
-        },
+        }
+      },
+      {
+        path: 'more-details',
+        component: MoreDetailsComponent,
+        data: {
+          title: 'More-Details'
+        }
       }
     ],
   },

@@ -1,1 +1,81 @@
-<p>cards works!</p>
+<div class="container">
+  <div class="row">
+    <ng-container *ngFor="let n of array">
+      <div class="col-md-6 mb-3">
+        <c-card class="mb-3 pointer-cursor" [ngStyle]="{'max-width.px': 540}" (click)="onClick()">
+          <c-row class="g-0">
+
+            <c-col [md]="4" class="p-2 d-flex flex-column justify-content-around">
+              <div class="date">
+                Sent: {{ '2023-12-18' | date:'MMM d, yyyy' }}
+              </div>
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-7">
+                  <img [cCardImg] src="./assets/img/coin/alicoin.png" alt="" style="max-width: 100%;">
+                </div>
+                <div class="col-5">
+                  <div class="coin-name">
+                    BABA
+                  </div>
+                </div>
+              </div>
+              <div>
+                alibaba
+              </div>
+            </c-col>
+
+            <c-card-body cCol [md]="8">
+
+              <div class="row">
+                <div class="col-6 mb-3 details">
+                    <div class="heading">
+                      Stop Loss
+                    </div>
+                    <div class="text-contain">
+                      {{60 | number:'1.1'}}
+                    </div>
+                  </div>
+                  <div class="col-6 mb-3 details">
+                    <div class="heading">
+                      Max Gain
+                    </div>
+                    <div class="text-style text-contain">
+                      {{ 50.68 | percent }}
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6 mb-3 details">
+                  <div class="heading">
+                    Buy Target
+                  </div>
+                  <div class="text-contain">
+                    {{73 | number:'1.1'}}
+                  </div>
+                </div>
+                <div class="col-6 mb-3 details">
+                  <div class="heading">
+                    Sell Target
+                  </div>
+                  <div class="text-contain">
+                    <span>{{90 | number:'1.1'}}</span>/
+                    <span>{{100 | number:'1.1'}}</span>/
+                    <span>{{110 | number:'1.1'}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <small class="text-bottom">
+                Value stock, high risk, ideal buy zone within 3% of buy target
+              </small>
+
+            </c-card-body>
+
+          </c-row>
+        </c-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+

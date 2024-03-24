@@ -1,0 +1,52 @@
+.date {
+  font-style: italic;
+  color: grey;
+}
+
+.coin-name {
+  font-weight: bold;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .heading {
+    padding: 1px 5px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 2px;
+    color: grey;
+  }
+
+  .text-style {
+    border-radius: 5px;
+    padding: 1px 5px;
+    background-color: #2b812b;
+  }
+
+  .text-contain {
+    color: black;
+  }
+}
+
+.text-bottom {
+  display: block;
+  color: grey;
+  font-style: italic;
+  text-align: right;
+}
+
+c-col {
+  position: relative; /* Ensure positioning context for pseudo-element */
+}
+
+c-col::after {
+  content: ''; /* Required for pseudo-element */
+  position: absolute; /* Position the pseudo-element */
+  top: 20px; /* Add padding at the top */
+  bottom: 20px; /* Add padding at the bottom */
+  right: 0; /* Position the pseudo-element to the right */
+  width: 1px; /* Set the width of the border */
+  background-color: lightgrey; /* Color of the border */
+}
