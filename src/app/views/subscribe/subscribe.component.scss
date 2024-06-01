@@ -1,0 +1,14 @@
+#subscribeButton {
+  background-color: #303c54;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 2px 5px;
+
+  &:hover {
+    background-color: rgba(77, 87, 109, 0.86);
+  }
+  &:active {
+    background-color: #303c54;
+  }
+}

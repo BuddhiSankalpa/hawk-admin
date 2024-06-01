@@ -13,7 +13,6 @@ export class CardsComponent {
   constructor(private router: Router) {
   }
 
-
   onClick() {
     this.router.navigate(['/cards/more-details'])
   }

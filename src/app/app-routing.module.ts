@@ -6,6 +6,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import {MoreDetailsComponent} from "./views/cards/more-details/more-details.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,11 @@ const routes: Routes = [
         path: 'cards',
         loadChildren: () =>
           import('./views/cards/cards.module').then((m) => m.CardsModule)
+      },
+      {
+        path: 'subscribe',
+        loadChildren: () =>
+          import('./views/subscribe/subscribe.module').then((m) => m.SubscribeModule)
       },
       {
         path: 'base',

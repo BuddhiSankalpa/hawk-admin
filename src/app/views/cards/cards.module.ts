@@ -7,16 +7,19 @@ import {
   CardComponent,
   CardImgDirective, CardTextDirective, CardTitleDirective,
   ColComponent,
-  ColDirective,
-  RowComponent
+  ColDirective, NavComponent, NavLinkDirective,
+  RowComponent, TabContentComponent, TabContentRefDirective, TabPaneComponent
 } from "@coreui/angular";
 import {CardsComponent} from "./cards.component";
 import {MoreDetailsComponent} from "./more-details/more-details.component";
+import {RouterLink} from "@angular/router";
+import {AnalysisComponent} from "./analysis/analysis.component";
 
 
 @NgModule({
   declarations: [
-    CardsComponent
+    CardsComponent,
+    MoreDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,13 @@ import {MoreDetailsComponent} from "./more-details/more-details.component";
     CardTitleDirective,
     CardComponent,
     NgOptimizedImage,
-    MoreDetailsComponent
+    NavComponent,
+    NavLinkDirective,
+    TabContentRefDirective,
+    RouterLink,
+    TabContentComponent,
+    TabPaneComponent,
+    AnalysisComponent
   ]
 })
 export class CardsModule { }

@@ -13,13 +13,13 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'card',
+        redirectTo: '',
       },
       {
-        path: 'card',
+        path: '',
         component: CardsComponent,
         data: {
-          title: 'Card',
+          title: '',
         }
       },
       {

@@ -3,6 +3,11 @@
   color: grey;
 }
 
+c-card:hover {
+  border-color: #46546c;
+  box-shadow: 0 0 10px 2px #46546c;
+}
+
 .coin-name {
   font-weight: bold;
 }
