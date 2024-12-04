@@ -8,6 +8,6 @@ export class AuthService {
   constructor() { }
 
   public isAuthenticated(): boolean {
-    return !!sessionStorage.getItem('webapp-token');
+    return !!localStorage.getItem('webapp-token');
   }
 }

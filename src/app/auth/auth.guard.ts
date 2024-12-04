@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       return false;
     }
     if (!mainServ.loggedUser){
-      const user = sessionStorage.getItem('webapp-user');
+      const user = localStorage.getItem('webapp-user');
       mainServ.loggedUser = user ? JSON.parse(atob(user)) : null;
     }
 
