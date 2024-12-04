@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ApiService} from "../../../service/api.service";
 import { ToastrService } from 'ngx-toastr';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-
+  isLogin: boolean = false;
   loginForm: FormGroup;
 
   constructor(
@@ -25,16 +26,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    // this.loginForm = new FormGroup({
-    //   email: new FormControl('', [Validators.required, Validators.email]),
-    //   password: new FormControl('', Validators.required),
-    // });
-  }
-
   login() {
+    this.isLogin = true;
     this.apiService
       .login(this.loginForm.value.email, this.loginForm.value.password)
+      .pipe(
+        finalize(() => {
+          this.isLogin = false;
+        })
+      )
       .subscribe({
         next: res => {
           if (res) {
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
               // sessionStorage.setItem('webapp-user', res.user);
               localStorage.setItem('webapp-token', res.content.accessToken);
 
-              this.router.navigateByUrl('/portal');
+              this.router.navigateByUrl('/dashboard');
             } else {
               this.toastr.error(msg);
             }
