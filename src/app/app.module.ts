@@ -39,6 +39,7 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
+import {LaddaModule} from "angular2-ladda";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -77,6 +78,7 @@ const APP_CONTAINERS = [
     NgScrollbarModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    LaddaModule
   ],
   providers: [
     {

@@ -1,0 +1,40 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm [formGroup]="otpForm" (submit)="confirmOtp()">
+              <h2>OTP</h2>
+
+              <div class="mb-3">
+                <ng-otp-input [config]="{ length: 6, allowNumbersOnly: true }" formControlName="otp" class="mb-2">
+                </ng-otp-input>
+              </div>
+
+              <div class="non-selectable mb-2">
+                <span *ngIf="resendDisabled" id="otpTimer">Resend OTP in: {{ remainingTime }}</span>
+              </div>
+              <div class="d-flex gap-1">
+                <button cButton color="success"
+                        [disabled]="!otpForm.valid"
+                        [ladda]="isConfirmOtp"
+                        type="submit">
+                  Confirm OTP
+                </button>
+                <button cButton color="secondary"
+                        (click)="resendOTP()" [class.is-disable]="resendDisabled"
+                        [disabled]="resendDisabled"
+                        [ladda]="isResendOtp"
+                        type="button">
+                  Resend OTP
+                </button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
+

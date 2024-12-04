@@ -3,34 +3,64 @@
     <c-row class="justify-content-center">
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
-          <c-card-body class="p-4">
-            <form cForm>
-              <h1>Register</h1>
-              <p class="text-medium-emphasis">Create your account</p>
+          <c-card-body class="p-4 pt-2 pb-2">
+            <form cForm [formGroup]="registerForm" (submit)="register()">
+              <h2>Register</h2>
+              <p class="text-medium-emphasis mb-2">Create your account</p>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Username" />
+                <input autoComplete="firstname" cFormControl placeholder="First name" formControlName="firstName"/>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="lastname" cFormControl placeholder="Last name" formControlName="lastName"/>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilGlobeAlt"></svg>
+                </span>
+                <input autoComplete="country" cFormControl placeholder="Country" formControlName="country"/>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilHome"></svg>
+                </span>
+                <input autoComplete="city" cFormControl placeholder="City" formControlName="city"/>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilMobile"></svg>
+                </span>
+                <input autoComplete="mobile-number" cFormControl placeholder="Mobile number" formControlName="phoneNo"
+                       (input)="onInput($event)"
+                       type="tel"/>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>&#64;</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
+                <input autoComplete="email" cFormControl placeholder="Email" formControlName="email"/>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" />
+                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" formControlName="password"/>
               </c-input-group>
-              <c-input-group class="mb-4">
+              <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
+                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" formControlName="repeatPassword"/>
               </c-input-group>
               <div class="d-grid">
-                <button cButton color="success">Create Account</button>
+                <button cButton color="success"
+                        type="submit"
+                        [disabled]="!registerForm.valid">
+                  Create Account
+                </button>
               </div>
             </form>
           </c-card-body>

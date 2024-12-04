@@ -5,6 +5,7 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import {ApiService} from "../../../service/api.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-default-header',
@@ -28,12 +29,15 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
 
   logout() {
+    console.log('logout')
     this.apiService.logOut()
-      .subscribe({
-        complete: () => {
+      .pipe(
+        finalize(() => {
+          console.log('final')
           localStorage.removeItem('webapp-token');
-          this.router.navigate(['/login']);
-        }
-      })
+          this.router.navigateByUrl('/login');
+        })
+      )
+      .subscribe()
   }
 }

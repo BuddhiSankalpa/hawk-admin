@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { DefaultLayoutComponent } from './containers';
-import { Page404Component } from './views/pages/page404/page404.component';
-import { Page500Component } from './views/pages/page500/page500.component';
-import { LoginComponent } from './views/pages/login/login.component';
-import { RegisterComponent } from './views/pages/register/register.component';
+import {DefaultLayoutComponent} from './containers';
+import {Page404Component} from './views/pages/page404/page404.component';
+import {Page500Component} from './views/pages/page500/page500.component';
+import {LoginComponent} from './views/pages/login/login.component';
+import {RegisterComponent} from './views/pages/register/register.component';
 import {authGuard} from "./auth/auth.guard";
+import {OtpComponent} from "./views/pages/otp/otp.component";
 
 const routes: Routes = [
   {
@@ -110,6 +111,13 @@ const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
+    }
+  },
+  {
+    path: 'otp/:id',
+    component: OtpComponent,
+    data: {
+      title: 'Otp Page'
     }
   },
   {path: '**', redirectTo: 'dashboard'}
