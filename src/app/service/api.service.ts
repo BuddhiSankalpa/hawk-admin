@@ -12,7 +12,7 @@ export class ApiService {
 
   getToken() {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${sessionStorage.getItem('webapp-token')}`,
+      Authorization: `Bearer ${localStorage.getItem('webapp-token')}`,
     });
     return { headers: headers };
   }
@@ -28,7 +28,21 @@ export class ApiService {
 
   logOut(): Observable<any> {
     const url = `${baseUrl}/auth/logout`;
-    console.log(this.getToken());
     return this.http.post(url, null, this.getToken());
+  }
+
+  signup(formData: any): Observable<any> {
+    const url = `${baseUrl}/register/signup`;
+    return this.http.post(url, formData);
+  }
+
+  verifyOtp(formData: any, id: any): Observable<any> {
+    const url = `${baseUrl}/register/verify-otp/${id}`;
+    return this.http.put(url, formData);
+  }
+
+  resendOtp(id: any): Observable<any> {
+    const url = `${baseUrl}/register/resend-otp/${id}`;
+    return this.http.put(url, null);
   }
 }
