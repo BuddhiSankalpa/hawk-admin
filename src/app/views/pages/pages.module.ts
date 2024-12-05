@@ -12,6 +12,7 @@ import {IconModule} from '@coreui/icons-angular';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgOtpInputModule} from "ng-otp-input";
 import {LaddaModule} from "angular2-ladda";
+import {ForgetPasswordComponent} from "./forget-password/forget-password.component";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {LaddaModule} from "angular2-ladda";
     RegisterComponent,
     Page404Component,
     Page500Component,
-    OtpComponent
+    OtpComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     CommonModule,

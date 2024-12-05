@@ -8,6 +8,7 @@ import {LoginComponent} from './views/pages/login/login.component';
 import {RegisterComponent} from './views/pages/register/register.component';
 import {authGuard} from "./auth/auth.guard";
 import {OtpComponent} from "./views/pages/otp/otp.component";
+import {ForgetPasswordComponent} from "./views/pages/forget-password/forget-password.component";
 
 const routes: Routes = [
   {
@@ -118,6 +119,13 @@ const routes: Routes = [
     component: OtpComponent,
     data: {
       title: 'Otp Page'
+    }
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'Forget Password Page'
     }
   },
   {path: '**', redirectTo: 'dashboard'}

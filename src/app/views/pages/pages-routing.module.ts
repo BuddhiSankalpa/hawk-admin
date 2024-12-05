@@ -5,6 +5,7 @@ import {Page500Component} from './page500/page500.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {OtpComponent} from "./otp/otp.component";
+import {ForgetPasswordComponent} from "./forget-password/forget-password.component";
 
 const routes: Routes = [
   {
@@ -40,6 +41,13 @@ const routes: Routes = [
     component: OtpComponent,
     data: {
       title: 'Otp Page'
+    }
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'Forget Password Page'
     }
   },
 ];

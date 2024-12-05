@@ -45,4 +45,9 @@ export class ApiService {
     const url = `${baseUrl}/register/resend-otp/${id}`;
     return this.http.put(url, null);
   }
+
+  forgetPassword(formData: any): Observable<any> {
+    const url = `${baseUrl}/reset/forget-password`;
+    return this.http.put(url, formData);
+  }
 }

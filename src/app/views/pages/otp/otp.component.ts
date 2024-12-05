@@ -93,7 +93,7 @@ export class OtpComponent implements OnInit{
   }
 
   startTimer() {
-    this.timeOutDuration = 5;
+    this.timeOutDuration = 60;
     this.resendDisabled = true;
     this.isResendOtp = false;
     this.remainingTime = `${this.timeOutDuration} seconds`;
