@@ -14,6 +14,7 @@ export class LoginComponent {
 
   isLogin: boolean = false;
   loginForm: FormGroup;
+  type = 'password';
 
   constructor(
     private apiService: ApiService,
@@ -57,4 +58,7 @@ export class LoginComponent {
       })
   }
 
+  showPassword() {
+    this.type = this.type === 'password' ? 'text' : 'password';
+  }
 }

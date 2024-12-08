@@ -55,7 +55,7 @@ import {
   cilList,
   cilListNumbered,
   cilLocationPin,
-  cilLockLocked,
+  cilLockLocked, cilLockUnlocked,
   cilMagnifyingGlass,
   cilMap,
   cilMediaPlay,
@@ -183,7 +183,8 @@ export const iconSubset = {
   cilUserFollow,
   cilUserUnfollow,
   cilGlobeAlt,
-  cilMobile
+  cilMobile,
+  cilLockUnlocked
 };
 
 export enum IconSubset {

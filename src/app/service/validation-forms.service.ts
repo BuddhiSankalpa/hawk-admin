@@ -9,7 +9,7 @@ export class ValidationFormsService {
 
   formRules = {
     nonEmpty: '^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$',
-    usernameMin: 5,
+    mobileNumberMin: 10,
     passwordMin: 6,
     passwordPattern: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
   };
@@ -17,12 +17,13 @@ export class ValidationFormsService {
   formErrors = {
     firstName: '',
     lastName: '',
-    username: '',
+    phoneNo: '',
     email: '',
     password: '',
     confirmPassword: '',
-    birthday: '',
-    accept: false
+    tempPassword: '',
+    country: '',
+    city: ''
   };
 
   constructor() {
@@ -33,13 +34,12 @@ export class ValidationFormsService {
       lastName: {
         required: 'Last name is required'
       },
-      username: {
-        required: 'Username is required',
-        minLength: `Username must be ${this.formRules.usernameMin} characters or more`,
-        pattern: 'Must contain letters and/or numbers, no trailing spaces'
+      phoneNo: {
+        required: 'Mobile number is required',
+        minLength: `Mobile number must contain  ${this.formRules.mobileNumberMin} numbers`
       },
       email: {
-        required: 'required',
+        required: 'Email is required',
         email: 'Invalid email address'
       },
       password: {
@@ -51,11 +51,14 @@ export class ValidationFormsService {
         required: 'Password confirmation is required',
         passwordMismatch: 'Passwords must match'
       },
-      birthday: {
-        required: 'Birthday date required'
+      tempPassword: {
+        required: 'Temporary password is required'
       },
-      accept: {
-        requiredTrue: 'You have to accept our Terms and Conditions'
+      country: {
+        required: 'Country required'
+      },
+      city: {
+        required: 'City required'
       }
     };
   }

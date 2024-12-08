@@ -6,6 +6,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {OtpComponent} from "./otp/otp.component";
 import {ForgetPasswordComponent} from "./forget-password/forget-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 const routes: Routes = [
   {
@@ -48,6 +49,13 @@ const routes: Routes = [
     component: ForgetPasswordComponent,
     data: {
       title: 'Forget Password Page'
+    }
+  },
+  {
+    path: 'reset-password/:id',
+    component: ResetPasswordComponent,
+    data: {
+      title: 'Reset Password Page'
     }
   },
 ];

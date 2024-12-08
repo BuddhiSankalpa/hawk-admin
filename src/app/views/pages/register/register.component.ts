@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../../../service/api.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {ValidationFormsService} from "../../../service/validation-forms.service";
+import {PasswordValidators} from "../../../service/validators";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -11,24 +14,21 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent {
 
-  registerForm: FormGroup = this.fb.group({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
-    repeatPassword: new FormControl('', Validators.required),
-    phoneNo: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')])
-  },{
-    validator: this.passwordMatchValidator
-  });
+  formErrors: any;
+  formControls!: string[];
+  submitted: boolean = false;
+  registerForm!: FormGroup;
+
   constructor(
     private apiService: ApiService,
-    private fb: FormBuilder,
     private toastr: ToastrService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private formBuilder: FormBuilder,
+    public validationFormsService: ValidationFormsService
+  ) {
+    this.formErrors = this.validationFormsService.errorMessages;
+    this.createForm()
+  }
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -36,18 +36,46 @@ export class RegisterComponent {
     this.registerForm.get('phoneNo')?.setValue(input.value, { emitEvent: false });
   }
 
-  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const password = control.get('password');
-    const repeatPassword = control.get('repeatPassword');
-
-    if (password && repeatPassword && password.value !== repeatPassword.value) {
-      return { passwordMismatch: true };
-    }
-    return null;
+  createForm() {
+    this.registerForm = this.formBuilder.group(
+      {
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        phoneNo: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(this.validationFormsService.formRules.mobileNumberMin),
+          ]
+        ],
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(this.validationFormsService.formRules.passwordMin),
+            Validators.pattern(this.validationFormsService.formRules.passwordPattern)
+          ]
+        ],
+        confirmPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(this.validationFormsService.formRules.passwordMin),
+            Validators.pattern(this.validationFormsService.formRules.passwordPattern)
+          ]
+        ],
+        country: ['', [Validators.required]],
+        city: ['', [Validators.required]]
+      },
+      { validators: [PasswordValidators.confirmPassword] }
+    );
+    this.formControls = Object.keys(this.registerForm.controls);
   }
 
   register() {
     if (this.registerForm.valid) {
+      this.submitted = true;
       const { firstName, lastName, country, city, email, password, phoneNo } = this.registerForm.value;
       const formData = {
         email,
@@ -61,6 +89,11 @@ export class RegisterComponent {
         }
       }
       this.apiService.signup(formData)
+        .pipe(
+          finalize(() => {
+            this.submitted = false;
+          })
+        )
         .subscribe({
           next: value => {
             if (value && value.statusCode === 200) {
@@ -71,7 +104,15 @@ export class RegisterComponent {
               this.toastr.error("Registration failed. Please try again!");
             }
           },
-          error: err => this.toastr.error("Registration failed. Please try again!")
+          error: err => {
+            if (err.error?.statusCode === 417) {
+              if (err?.error?.validationFailure?.message === 'email.already.exist') {
+                this.toastr.error("Email already exist");
+              }
+            } else {
+              this.toastr.error("Registration failed. Please try again!")
+            }
+          }
         });
     }
   }

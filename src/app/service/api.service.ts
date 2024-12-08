@@ -50,4 +50,10 @@ export class ApiService {
     const url = `${baseUrl}/reset/forget-password`;
     return this.http.put(url, formData);
   }
+
+  resetPassword(formData: any, id: any): Observable<any> {
+    const url = `${baseUrl}/reset/reset-password/${id}`;
+    console.log(formData)
+    return this.http.put(url, formData);
+  }
 }

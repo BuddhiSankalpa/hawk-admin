@@ -78,7 +78,7 @@ const APP_CONTAINERS = [
     NgScrollbarModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    LaddaModule
+    LaddaModule,
   ],
   providers: [
     {

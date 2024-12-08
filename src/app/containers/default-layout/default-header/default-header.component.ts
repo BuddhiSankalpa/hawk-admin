@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import {ApiService} from "../../../service/api.service";
@@ -29,11 +28,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
 
   logout() {
-    console.log('logout')
     this.apiService.logOut()
       .pipe(
         finalize(() => {
-          console.log('final')
           localStorage.removeItem('webapp-token');
           this.router.navigateByUrl('/login');
         })

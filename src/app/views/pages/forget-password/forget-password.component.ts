@@ -4,6 +4,7 @@ import {ApiService} from "../../../service/api.service";
 import {finalize} from "rxjs";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {AppService} from "../../../service/app.service";
 
 @Component({
   selector: 'app-forget-password',
@@ -20,7 +21,8 @@ export class ForgetPasswordComponent {
   constructor(
     private apiService: ApiService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private appService: AppService
   ) {
   }
 
@@ -36,7 +38,8 @@ export class ForgetPasswordComponent {
         next: value => {
           if (value?.statusCode === 200){
             const id = value?.content?.id;
-            this.router.navigateByUrl(`/otp/${id}`)
+            this.appService.setResetData(this.forgetPasswordForm.get('email')?.value,id);
+            this.router.navigateByUrl(`/reset-password/${id}`)
           } else {
             this.toastr.error("Registration failed. Please try again!");
           }

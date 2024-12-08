@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {NgOtpInputModule} from "ng-otp-input";
 import {LaddaModule} from "angular2-ladda";
 import {ForgetPasswordComponent} from "./forget-password/forget-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ForgetPasswordComponent} from "./forget-password/forget-password.compone
     Page404Component,
     Page500Component,
     OtpComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
