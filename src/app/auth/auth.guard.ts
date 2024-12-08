@@ -2,6 +2,7 @@ import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {AuthService} from "./auth.service";
 import {AppService} from "../service/app.service";
+import {WEB_USER} from "../utils/constant";
 
 export const authGuard: CanActivateFn = (route, state) => {
 
@@ -14,9 +15,8 @@ export const authGuard: CanActivateFn = (route, state) => {
       return false;
     }
     if (!mainServ.loggedUser){
-      const user = localStorage.getItem('webapp-user');
+      const user = localStorage.getItem(WEB_USER);
       mainServ.loggedUser = user ? JSON.parse(atob(user)) : null;
     }
-
     return true;
 };

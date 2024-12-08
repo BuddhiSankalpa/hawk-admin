@@ -5,6 +5,7 @@ import {ApiService} from "../../../service/api.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {finalize} from "rxjs";
+import {WEB_TOKEN} from "../../../utils/constant";
 
 @Component({
   selector: 'app-default-header',
@@ -31,7 +32,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.apiService.logOut()
       .pipe(
         finalize(() => {
-          localStorage.removeItem('webapp-token');
+          localStorage.removeItem(WEB_TOKEN);
           this.router.navigateByUrl('/login');
         })
       )

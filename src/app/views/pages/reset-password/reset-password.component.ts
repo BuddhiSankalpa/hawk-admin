@@ -4,7 +4,7 @@ import {ApiService} from "../../../service/api.service";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ValidationFormsService} from "../../../service/validation-forms.service";
-import {PasswordValidators} from "../../../service/validators";
+import {PasswordValidators} from "../../../utils/validators";
 import {finalize} from "rxjs";
 import {AppService} from "../../../service/app.service";
 

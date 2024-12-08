@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {finalize} from "rxjs";
+import {WEB_TOKEN} from "../../../utils/constant";
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,7 @@ export class LoginComponent {
               // this.mainServ.loggedUser = JSON.parse(atob(res.user));
 
               // sessionStorage.setItem('webapp-user', res.user);
-              localStorage.setItem('webapp-token', res.content.accessToken);
+              localStorage.setItem(WEB_TOKEN, res.content.accessToken);
 
               this.router.navigateByUrl('/dashboard');
             } else {
