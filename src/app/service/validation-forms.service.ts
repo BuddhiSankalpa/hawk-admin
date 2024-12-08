@@ -55,10 +55,10 @@ export class ValidationFormsService {
         required: 'Temporary password is required'
       },
       country: {
-        required: 'Country required'
+        required: 'Country is required'
       },
       city: {
-        required: 'City required'
+        required: 'City is required'
       }
     };
   }
