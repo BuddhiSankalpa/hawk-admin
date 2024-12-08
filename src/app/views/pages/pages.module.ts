@@ -37,10 +37,7 @@ import {ResetPasswordComponent} from "./reset-password/reset-password.component"
     ReactiveFormsModule,
     NgOtpInputModule,
     LaddaModule.forRoot({
-      style: "zoom-in",
-      spinnerSize: 40,
-      spinnerColor: "red",
-      spinnerLines: 12
+      spinnerColor: "white",
     })
   ]
 })

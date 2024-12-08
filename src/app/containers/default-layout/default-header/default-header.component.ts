@@ -14,6 +14,7 @@ import {WEB_TOKEN} from "../../../utils/constant";
 export class DefaultHeaderComponent extends HeaderComponent {
 
   @Input() sidebarId: string = "sidebar";
+  isLogout: boolean = false;
 
   public newMessages = new Array(4)
   public newTasks = new Array(5)
@@ -29,9 +30,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
 
   logout() {
+    this.isLogout = true;
     this.apiService.logOut()
       .pipe(
         finalize(() => {
+          this.isLogout = false;
           localStorage.removeItem(WEB_TOKEN);
           this.router.navigateByUrl('/login');
         })

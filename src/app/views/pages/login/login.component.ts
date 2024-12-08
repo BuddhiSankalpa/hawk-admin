@@ -49,13 +49,22 @@ export class LoginComponent {
               // sessionStorage.setItem('webapp-user', res.user);
               localStorage.setItem(WEB_TOKEN, res.content.accessToken);
 
-              this.router.navigateByUrl('/dashboard');
+              this.router.navigateByUrl('/cards');
             } else {
               this.toastr.error(msg);
             }
           }
         },
-        error: err => this.toastr.error('Login Failed!')
+        error: err => {
+          if (err?.error?.statusCode === 417) {
+            if (err.error?.validationFailure === 'user.doesnt.exist') {
+              this.toastr.error('Invalid email!')
+            } else if (err.error?.validationFailure === 'password.incorrect') {
+              this.toastr.error('Invalid password!')
+            }
+          }
+          this.toastr.error('Login Failed!')
+        }
       })
   }
 

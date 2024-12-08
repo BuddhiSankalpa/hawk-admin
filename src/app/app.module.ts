@@ -78,7 +78,9 @@ const APP_CONTAINERS = [
     NgScrollbarModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    LaddaModule,
+    LaddaModule.forRoot({
+      style: "zoom-in"
+    }),
   ],
   providers: [
     {

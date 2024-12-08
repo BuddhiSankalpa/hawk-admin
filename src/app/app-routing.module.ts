@@ -14,7 +14,7 @@ import {ResetPasswordComponent} from "./views/pages/reset-password/reset-passwor
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'cards',
     pathMatch: 'full',
   },
   {
@@ -25,16 +25,16 @@ const routes: Routes = [
       title: 'Home'
     },
     children: [
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () =>
-          import('./views/theme/theme.module').then((m) => m.ThemeModule)
-      },
+      // {
+      //   path: 'dashboard',
+      //   loadChildren: () =>
+      //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      // },
+      // {
+      //   path: 'theme',
+      //   loadChildren: () =>
+      //     import('./views/theme/theme.module').then((m) => m.ThemeModule)
+      // },
       {
         path: 'cards',
         loadChildren: () =>
@@ -136,7 +136,7 @@ const routes: Routes = [
       title: 'Reset Password Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  {path: '**', redirectTo: 'cards'}
 ];
 
 @NgModule({
