@@ -53,7 +53,11 @@ export class ApiService {
 
   resetPassword(formData: any, id: any): Observable<any> {
     const url = `${baseUrl}/reset/reset-password/${id}`;
-    console.log(formData)
     return this.http.put(url, formData);
+  }
+
+  getSubscriptionPlan(): Observable<any> {
+    const url = `${baseUrl}/plan/all`;
+    return this.http.get(url, this.getToken());
   }
 }
