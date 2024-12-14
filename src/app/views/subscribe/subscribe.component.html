@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">-->
 <!--  <div class="d-flex justify-content-between mb-2">-->
 <!--    <div>-->
 <!--      Your subscription plan is ....-->
@@ -6,11 +6,64 @@
 <!--    <button id="subscribeButton">Change Subscription plan</button>-->
 <!--  </div>-->
 
-  <stripe-pricing-table [attr.pricing-table-id]=pricingTableId
-                        [attr.publishable-key]=publishableKey>
-  </stripe-pricing-table>
-
-</div>
-
+<!--  <stripe-pricing-table [attr.pricing-table-id]=pricingTableId-->
+<!--                        [attr.publishable-key]=publishableKey>-->
+<!--  </stripe-pricing-table>-->
+<!--</div>-->
 
 
+<c-row *ngIf="!loading" [gutter]="4" class="mb-3 pt-2" [md]="3" [xs]="1">
+  <c-col *ngFor="let subPlan of subDetails" class="p-2 mt-0">
+    <c-card class="h-100">
+      <div class="image-container-main">
+        <img cCardImg="top" [src]="'./assets/img/subscription/'+subPlan?.name.toLowerCase()+'.png'"
+             class="image-container"
+             alt="subscription plan">
+        <span *ngIf="subPlan?.standard === true" class="image-overlay loading-skeleton">Recommended</span>
+      </div>
+      <c-card-body class="override-c-card-body">
+        <h3 cCardTitle style="font-weight: bold" class="mb-1">{{ subPlan?.name }}</h3>
+        <p cCardText class="mb-1">
+          {{subPlan?.description}}
+        </p>
+        <span class="currency">{{subPlan?.price | currency}}</span>
+        <span style="font-size: 15px; color: grey"> per {{subPlan?.duration}} month</span>
+        <button cButton style="display: block" class="w-100">Start Trial</button>
+        <div class="pt-2">
+          <div>This includes:</div>
+          <ul style="list-style: circle" class="ps-2">
+            <li *ngFor="let point of getPackageDetails(subPlan?.name)" style="list-style: none">
+              <svg [cIcon]="cilCheckCircle" width="22" title="Check Circle Icon" class="pe-2"></svg>
+              {{point}}
+            </li>
+          </ul>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+
+
+<!-- Skeleton Loader -->
+<c-row *ngIf="loading" [gutter]="4" class="mb-3" [md]="3" [xs]="1">
+  <c-col *ngFor="let subPlan of subDetails" class="p-1 loading-skeleton">
+    <c-card>
+      <h1 class="m-3" style="height: 150px">Example text</h1>
+      <c-card-body>
+        <span class="currency">Gold</span>
+        <div></div>
+        <span>Rs.1000.00</span>
+        <button cButton style="display: block" class="w-100 mb-2">Start Trial</button>
+        <div class="pt-2">
+          <ul>
+            <li>Go somewhere</li>
+            <li>Go somewhere</li>
+            <li>Go somewhere</li>
+            <li>Go somewhere</li>
+          </ul>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
