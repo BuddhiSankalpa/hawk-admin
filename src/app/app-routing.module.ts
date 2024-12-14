@@ -1,36 +1,40 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { DefaultLayoutComponent } from './containers';
-import { Page404Component } from './views/pages/page404/page404.component';
-import { Page500Component } from './views/pages/page500/page500.component';
-import { LoginComponent } from './views/pages/login/login.component';
-import { RegisterComponent } from './views/pages/register/register.component';
-import {MoreDetailsComponent} from "./views/cards/more-details/more-details.component";
+import {DefaultLayoutComponent} from './containers';
+import {Page404Component} from './views/pages/page404/page404.component';
+import {Page500Component} from './views/pages/page500/page500.component';
+import {LoginComponent} from './views/pages/login/login.component';
+import {RegisterComponent} from './views/pages/register/register.component';
+import {authGuard} from "./auth/auth.guard";
+import {OtpComponent} from "./views/pages/otp/otp.component";
+import {ForgetPasswordComponent} from "./views/pages/forget-password/forget-password.component";
+import {ResetPasswordComponent} from "./views/pages/reset-password/reset-password.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    redirectTo: 'cards',
+    pathMatch: 'full',
   },
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [authGuard],
     data: {
       title: 'Home'
     },
     children: [
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () =>
-          import('./views/theme/theme.module').then((m) => m.ThemeModule)
-      },
+      // {
+      //   path: 'dashboard',
+      //   loadChildren: () =>
+      //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      // },
+      // {
+      //   path: 'theme',
+      //   loadChildren: () =>
+      //     import('./views/theme/theme.module').then((m) => m.ThemeModule)
+      // },
       {
         path: 'cards',
         loadChildren: () =>
@@ -111,7 +115,28 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  {
+    path: 'otp/:id',
+    component: OtpComponent,
+    data: {
+      title: 'Otp Page'
+    }
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'Forget Password Page'
+    }
+  },
+  {
+    path: 'reset-password/:id',
+    component: ResetPasswordComponent,
+    data: {
+      title: 'Reset Password Page'
+    }
+  },
+  {path: '**', redirectTo: 'cards'}
 ];
 
 @NgModule({

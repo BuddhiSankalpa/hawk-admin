@@ -37,7 +37,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ladda/dist/ladda-themeless.min.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -50,7 +52,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "1500kb",
-                  "maximumError": "6mb"
+                  "maximumError": "7mb"
                 },
                 {
                   "type": "anyComponentStyle",

@@ -3,34 +3,250 @@
     <c-row class="justify-content-center">
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
-          <c-card-body class="p-4">
-            <form cForm>
-              <h1>Register</h1>
-              <p class="text-medium-emphasis">Create your account</p>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
-                <input autoComplete="name" cFormControl placeholder="Username" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>&#64;</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
-              </c-input-group>
-              <div class="d-grid">
-                <button cButton color="success">Create Account</button>
+          <c-card-body class="p-4 pt-2 pb-2">
+            <form cForm [formGroup]="registerForm" (submit)="register()">
+              <h2>Register</h2>
+              <p class="text-medium-emphasis mb-2">Create your account</p>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="firstName">First name</label>
+                <c-col *ngIf="registerForm.controls['firstName'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="on"
+                    cFormControl
+                    formControlName="firstName"
+                    id="firstName"
+                    placeholder="First name"
+                    required
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">
+                        {{ formErrors.firstName.required }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="lastName">Last name</label>
+                <c-col *ngIf="registerForm.controls['lastName'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="on"
+                    cFormControl
+                    formControlName="lastName"
+                    id="lastName"
+                    placeholder="Last name"
+                    required
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">
+                        {{ formErrors.lastName.required }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="phoneNo">Mobile Number</label>
+                <c-col *ngIf="registerForm.controls['phoneNo'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="on"
+                    cFormControl
+                    formControlName="phoneNo"
+                    id="phoneNo"
+                    placeholder="Mobile Number"
+                    required
+                    (input)="onInput($event)"
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">
+                        {{ formErrors.phoneNo.required }}
+                      </div>
+                      <div *ngIf="errors['minlength']">
+                        {{ formErrors.phoneNo.minLength }}
+                      </div>
+                      <div *ngIf="errors['pattern']">
+                        {{ formErrors.phoneNo.pattern }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="country">Country</label>
+                <c-col *ngIf="registerForm.controls['country'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="on"
+                    cFormControl
+                    formControlName="country"
+                    id="country"
+                    placeholder="Country"
+                    required
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">
+                        {{ formErrors.country.required }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="city">City</label>
+                <c-col *ngIf="registerForm.controls['city'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="on"
+                    cFormControl
+                    formControlName="city"
+                    id="city"
+                    placeholder="City"
+                    required
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">
+                        {{ formErrors.city.required }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="email">Email</label>
+                <c-col *ngIf="registerForm.controls['email'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="on"
+                    cFormControl
+                    formControlName="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                    type="email"
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">{{ formErrors.email?.required }}</div>
+                      <div *ngIf="errors['email']">
+                        {{ formErrors.email?.email }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="password">Password</label>
+                <c-col *ngIf="registerForm.controls['password'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="new-password"
+                    cFormControl
+                    formControlName="password"
+                    id="password"
+                    placeholder="Password"
+                    required
+                    type="password"
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['required']">{{ formErrors['password'].required }}</div>
+                      <div *ngIf="errors['minlength']">
+                        {{ formErrors['password'].minLength }}
+                      </div>
+                      <div *ngIf="errors['pattern']">
+                        {{ formErrors['password'].pattern }}
+                      </div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+              <c-row class="mb-1">
+                <label [sm]="4" cCol cLabel="col" for="confirmPassword">Confirm password</label>
+                <c-col *ngIf="registerForm.controls['confirmPassword'] as ctrl" [sm]="8">
+                  <input
+                    [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+                    autocomplete="off"
+                    cFormControl
+                    formControlName="confirmPassword"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    required
+                    type="password"
+                  />
+                  <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+                    <ng-container *ngIf="ctrl.errors as errors">
+                      <div *ngIf="errors['passwordMismatch']">
+                        {{ formErrors['confirmPassword'].passwordMismatch }}
+                      </div>
+                      <div *ngIf="errors['required']">{{ formErrors['required'].passwordMismatch }}</div>
+                    </ng-container>
+                  </c-form-feedback>
+                </c-col>
+              </c-row>
+
+              <div class="d-grid p-3">
+                <button cButton color="success"
+                        [ladda]="submitted"
+                        [disabled]="registerForm.invalid"
+                        type="submit">
+                  Create Account
+                </button>
               </div>
             </form>
           </c-card-body>

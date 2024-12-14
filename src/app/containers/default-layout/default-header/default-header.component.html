@@ -14,8 +14,8 @@
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
       <c-nav-item>
-        <a cNavLink routerLink="/dashboard" routerLinkActive="active">
-          Dashboard
+        <a cNavLink routerLink="/cards" routerLinkActive="active">
+          Cards
         </a>
       </c-nav-item>
 <!--      <c-nav-item>-->
@@ -65,6 +65,9 @@
       [caret]="false"
       cDropdownToggle
       class="py-0"
+      style="border: none"
+      data-spinner-color="red"
+      [ladda]="isLogout"
     >
       <c-avatar
         cTextColor="primary"
@@ -79,7 +82,7 @@
       <li>
         <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
       </li>
-      <li>
+      <li (click)="logout()">
         <a routerLink="./" cDropdownItem>
           <svg cIcon class="me-2" name="cilBell"></svg>
           Updates
@@ -153,9 +156,9 @@
         <hr cDropdownDivider/>
       </li>
       <li>
-        <a routerLink="./" cDropdownItem>
+        <a routerLink="./" cDropdownItem (click)="logout()">
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
-          Lock Account
+          Log out
         </a>
       </li>
       <li></li>

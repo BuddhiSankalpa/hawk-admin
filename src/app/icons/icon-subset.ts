@@ -44,7 +44,7 @@ import {
   cilDrop,
   cilEnvelopeClosed,
   cilEnvelopeOpen,
-  cilFile,
+  cilFile, cilGlobeAlt,
   cilHome,
   cilInbox,
   cilIndentDecrease,
@@ -55,11 +55,11 @@ import {
   cilList,
   cilListNumbered,
   cilLocationPin,
-  cilLockLocked,
+  cilLockLocked, cilLockUnlocked,
   cilMagnifyingGlass,
   cilMap,
   cilMediaPlay,
-  cilMenu,
+  cilMenu, cilMobile,
   cilMoon,
   cilNotes,
   cilOptions,
@@ -69,7 +69,7 @@ import {
   cilPencil,
   cilPeople,
   cilPrint,
-  cilPuzzle,
+  cilPuzzle, cilQrCode,
   cilReportSlash,
   cilSave,
   cilSettings,
@@ -181,7 +181,10 @@ export const iconSubset = {
   cilUser,
   cilUserFemale,
   cilUserFollow,
-  cilUserUnfollow
+  cilUserUnfollow,
+  cilGlobeAlt,
+  cilMobile,
+  cilLockUnlocked
 };
 
 export enum IconSubset {

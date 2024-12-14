@@ -1,11 +1,11 @@
 import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
-  {
-    name: 'Dashboard',
-    url: '/dashboard',
-    iconComponent: { name: 'cil-speedometer' }
-  },
+  // {
+  //   name: 'Dashboard',
+  //   url: '/dashboard',
+  //   iconComponent: { name: 'cil-speedometer' }
+  // },
   // {
   //   title: true,
   //   name: 'Theme'
@@ -21,10 +21,10 @@ export const navItems: INavData[] = [
   //   linkProps: { fragment: 'someAnchor' },
   //   iconComponent: { name: 'cil-pencil' }
   // },
-  {
-    title: true,
-    name: 'Cards'
-  },
+  // {
+  //   title: true,
+  //   name: 'Cards'
+  // },
   {
     name: 'Cards',
     url: '/cards',
