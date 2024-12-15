@@ -58,4 +58,9 @@ export class ApiService {
     const url = `${baseUrl}/plan/${id}/subscribe`;
     return this.http.post(url, null, { responseType: 'text' });
   }
+
+  getUserStock(): Observable<any> {
+    const url = `${baseUrl}/user-stock/all`;
+    return this.http.get(url);
+  }
 }
