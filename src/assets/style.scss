@@ -26,15 +26,23 @@
   object-fit: cover;
 }
 
-.image-overlay {
+/* Wrapper for overlays */
+.image-overlays {
   position: absolute;
   top: 10px;
   left: 10px;
+  display: flex;
+  gap: 8px; /* Space between labels */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Base style for individual overlays */
+.image-overlay {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   padding: 3px 8px;
   border-radius: 5px;
   font-size: 14px;
-  z-index: 1;
-  pointer-events: none;
 }
+

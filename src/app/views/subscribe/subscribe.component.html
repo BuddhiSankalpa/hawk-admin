@@ -1,11 +1,14 @@
 <c-row *ngIf="!loading" [gutter]="4" class="mb-3 pt-2" [md]="3" [xs]="1">
   <c-col *ngFor="let subPlan of subDetails" class="p-2 mt-0">
-    <c-card class="h-100">
+    <c-card class="h-100" [class.active-package]="subPlan?.id === packageId">
       <div class="image-container-main">
         <img cCardImg="top" [src]="'./assets/img/subscription/'+subPlan?.name.toLowerCase()+'.png'"
              class="image-container"
              alt="subscription plan">
-        <span *ngIf="subPlan?.standard === true" class="image-overlay loading-skeleton">Recommended</span>
+        <div class="image-overlays">
+          <span *ngIf="subPlan?.standard === true" class="image-overlay recommended">Recommended</span>
+          <span *ngIf="subPlan?.id === packageId" class="image-overlay active loading-skeleton">Active</span>
+        </div>
       </div>
       <c-card-body class="override-c-card-body">
         <h3 cCardTitle style="font-weight: bold" class="mb-1">{{ subPlan?.name }}</h3>
@@ -15,6 +18,7 @@
         <span class="currency">{{subPlan?.price | currency}}</span>
         <span style="font-size: 15px; color: grey"> per {{subPlan?.duration}} month</span>
         <button cButton style="display: block" class="w-100"
+                [disabled]="subPlan?.id === packageId"
                 [ladda]="isSubscribing[subPlan?.id]"
                 (click)="activateSubscriptionPlan(subPlan?.id)">
           Start Trial
