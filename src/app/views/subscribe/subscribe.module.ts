@@ -12,25 +12,27 @@ import {
   RowComponent
 } from "@coreui/angular";
 import {IconDirective} from "@coreui/icons-angular";
+import {LaddaModule} from "angular2-ladda";
 
 
 
 @NgModule({
   declarations: [SubscribeComponent],
-    imports: [
-        CommonModule,
-        SubscribeRoutingModule,
-        ColComponent,
-        RowComponent,
-        CardComponent,
-        CardBodyComponent,
-        GutterDirective,
-        CardImgDirective,
-        CardTitleDirective,
-        CardTextDirective,
-        ButtonDirective,
-        IconDirective
-    ],
+  imports: [
+    CommonModule,
+    SubscribeRoutingModule,
+    ColComponent,
+    RowComponent,
+    CardComponent,
+    CardBodyComponent,
+    GutterDirective,
+    CardImgDirective,
+    CardTitleDirective,
+    CardTextDirective,
+    ButtonDirective,
+    IconDirective,
+    LaddaModule
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SubscribeModule { }
