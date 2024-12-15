@@ -62,3 +62,15 @@
     @extend %loading-skeleton;
   }
 }
+
+.recommended {
+  background-color: rgba(3, 82, 229, 0.8);
+}
+
+.active {
+  background-color: rgba(200, 3, 3, 0.9);
+}
+
+.active-package {
+  box-shadow: 0 0 10px 2px rgb(255 0 0 / 52%);
+}

@@ -20,6 +20,7 @@ export class SubscribeComponent implements OnInit {
   loading: boolean = true;
   isSubscribing: Record<string, boolean> = {};
   subDetails: any = [1,2,3];
+  packageId: any;
   packageDetails: any = {
     "silver": [
       "No adds",
@@ -59,6 +60,11 @@ export class SubscribeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const user = sessionStorage.getItem('user-details');
+    if (user) {
+      this.packageId = JSON.parse(user).plan
+    }
+
     this.apiService.getSubscriptionPlan()
       .pipe(
         finalize(()=>{

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import {ApiService} from "../../../service/api.service";
@@ -11,7 +11,7 @@ import {WEB_TOKEN} from "../../../utils/constant";
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
 })
-export class DefaultHeaderComponent extends HeaderComponent {
+export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
 
   @Input() sidebarId: string = "sidebar";
   isLogout: boolean = false;
@@ -27,6 +27,17 @@ export class DefaultHeaderComponent extends HeaderComponent {
     private router: Router
   ) {
     super();
+  }
+
+  ngOnInit(): void {
+    this.apiService.getUser()
+      .subscribe({
+        next: value => {
+          if (value?.statusCode === 200) {
+            sessionStorage.setItem('user-details', JSON.stringify(value?.content));
+          }
+        }
+      })
   }
 
   logout() {
