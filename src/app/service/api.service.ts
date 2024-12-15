@@ -53,4 +53,9 @@ export class ApiService {
     const url = `${baseUrl}/plan/all`;
     return this.http.get(url);
   }
+
+  getStripeRedirectUrl(id: any): Observable<any> {
+    const url = `${baseUrl}/plan/${id}/subscribe`;
+    return this.http.post(url, null, { responseType: 'text' });
+  }
 }

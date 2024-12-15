@@ -3,6 +3,7 @@ import {pricing_table_id, publishable_key} from "../../../environment/environmen
 import {ApiService} from "../../service/api.service";
 import {finalize} from "rxjs";
 import {cilCheckCircle} from "@coreui/icons";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-subscribe',
@@ -10,10 +11,14 @@ import {cilCheckCircle} from "@coreui/icons";
   styleUrl: './subscribe.component.scss'
 })
 export class SubscribeComponent implements OnInit {
+  protected readonly cilCheckCircle = cilCheckCircle;
+
+  // use for frontend strip frontend integration
   pricingTableId: string = pricing_table_id;
   publishableKey: string = publishable_key;
 
   loading: boolean = true;
+  isSubscribing: Record<string, boolean> = {};
   subDetails: any = [1,2,3];
   packageDetails: any = {
     "silver": [
@@ -21,7 +26,7 @@ export class SubscribeComponent implements OnInit {
       "Custom timeframes",
       "Custom Range Bars",
       "Volume profile",
-      "Multiple watchlists",
+      "Multiple watchlist",
       "Bar replay",
       "Indicators on indicators"
     ],
@@ -30,7 +35,7 @@ export class SubscribeComponent implements OnInit {
       "Custom timeframes",
       "Custom Range Bars",
       "Volume profile",
-      "Multiple watchlists",
+      "Multiple watchlist",
       "Bar replay",
       "Indicators on indicators",
       "Volume profile"
@@ -40,7 +45,7 @@ export class SubscribeComponent implements OnInit {
       "Custom timeframes",
       "Custom Range Bars",
       "Volume profile",
-      "Multiple watchlists",
+      "Multiple watchlist",
       "Bar replay",
       "Indicators on indicators",
       "Custom Range Bars",
@@ -49,7 +54,8 @@ export class SubscribeComponent implements OnInit {
   }
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -63,10 +69,10 @@ export class SubscribeComponent implements OnInit {
         next: value => {
           if (value?.statusCode === 200) {
             this.subDetails = value?.content;
-          }
+          } else this.toastr.error("Error loading. Please try again!")
         },
-        error: err => {
-          console.log("error sub: " + err)
+        error:() => {
+          this.toastr.error("Error loading. Please try again!")
         }
       })
   }
@@ -75,5 +81,19 @@ export class SubscribeComponent implements OnInit {
     return this.packageDetails[planName.toLowerCase()];
   }
 
-  protected readonly cilCheckCircle = cilCheckCircle;
+  activateSubscriptionPlan(id: any) {
+    this.isSubscribing[id] = true;
+    this.apiService.getStripeRedirectUrl(id)
+      .pipe(
+        finalize(()=> this.isSubscribing[id] = false)
+      )
+      .subscribe({
+        next: redirectUrl => {
+          window.location.href = redirectUrl;
+        },
+        error: err => {
+          this.toastr.error('Something went wrong while processing the subscription!');
+        }
+      })
+  }
 }

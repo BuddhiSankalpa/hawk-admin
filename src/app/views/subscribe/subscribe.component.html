@@ -14,7 +14,11 @@
         </p>
         <span class="currency">{{subPlan?.price | currency}}</span>
         <span style="font-size: 15px; color: grey"> per {{subPlan?.duration}} month</span>
-        <button cButton style="display: block" class="w-100">Start Trial</button>
+        <button cButton style="display: block" class="w-100"
+                [ladda]="isSubscribing[subPlan?.id]"
+                (click)="activateSubscriptionPlan(subPlan?.id)">
+          Start Trial
+        </button>
         <div class="pt-2">
           <div>This includes:</div>
           <ul style="list-style: circle" class="ps-2">
@@ -35,7 +39,7 @@
 <c-row *ngIf="loading" [gutter]="4" class="mb-3" [md]="3" [xs]="1">
   <c-col *ngFor="let subPlan of subDetails" class="p-1 loading-skeleton">
     <c-card>
-      <h1 class="m-3" style="height: 150px">Example text</h1>
+      <h1 class="mt-3 ms-3 me-3 mb-0" style="height: 150px">Example text</h1>
       <c-card-body>
         <span class="currency">Gold</span>
         <div></div>

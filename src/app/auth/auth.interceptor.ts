@@ -19,9 +19,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(clonedReq).pipe(
       tap({
         error: (err) => {
-          console.log("AUTH ERROR: " + err)
+          console.log("AUTH ERROR: " + err.error.status)
           if (err?.error?.status === 403) {
             toast.warning('Session Expired!');
+            localStorage.clear();
+            router.navigateByUrl('/login');
+          } else if (err?.error?.status === 401) {
+            toast.warning('Unauthorized, please log again!');
             localStorage.clear();
             router.navigateByUrl('/login');
           }
