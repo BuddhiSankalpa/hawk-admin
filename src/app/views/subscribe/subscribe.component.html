@@ -1,17 +1,3 @@
-<!--<div class="container">-->
-<!--  <div class="d-flex justify-content-between mb-2">-->
-<!--    <div>-->
-<!--      Your subscription plan is ....-->
-<!--    </div>-->
-<!--    <button id="subscribeButton">Change Subscription plan</button>-->
-<!--  </div>-->
-
-<!--  <stripe-pricing-table [attr.pricing-table-id]=pricingTableId-->
-<!--                        [attr.publishable-key]=publishableKey>-->
-<!--  </stripe-pricing-table>-->
-<!--</div>-->
-
-
 <c-row *ngIf="!loading" [gutter]="4" class="mb-3 pt-2" [md]="3" [xs]="1">
   <c-col *ngFor="let subPlan of subDetails" class="p-2 mt-0">
     <c-card class="h-100">
@@ -67,3 +53,18 @@
     </c-card>
   </c-col>
 </c-row>
+
+
+<!-- strip frontend integration -->
+<!--<div class="container">-->
+<!--  <div class="d-flex justify-content-between mb-2">-->
+<!--    <div>-->
+<!--      Your subscription plan is ....-->
+<!--    </div>-->
+<!--    <button id="subscribeButton">Change Subscription plan</button>-->
+<!--  </div>-->
+
+<!--  <stripe-pricing-table [attr.pricing-table-id]=pricingTableId-->
+<!--                        [attr.publishable-key]=publishableKey>-->
+<!--  </stripe-pricing-table>-->
+<!--</div>-->

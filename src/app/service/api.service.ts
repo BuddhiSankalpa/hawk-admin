@@ -10,13 +10,6 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getToken() {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('webapp-token')}`,
-    });
-    return { headers: headers };
-  }
-
   login(email: any, password: any): Observable<any>{
     const url = `${baseUrl}/auth/login`;
     const body: object = {
@@ -28,7 +21,7 @@ export class ApiService {
 
   logOut(): Observable<any> {
     const url = `${baseUrl}/auth/logout`;
-    return this.http.post(url, null, this.getToken());
+    return this.http.post(url, null);
   }
 
   signup(formData: any): Observable<any> {
@@ -58,6 +51,6 @@ export class ApiService {
 
   getSubscriptionPlan(): Observable<any> {
     const url = `${baseUrl}/plan/all`;
-    return this.http.get(url, this.getToken());
+    return this.http.get(url);
   }
 }

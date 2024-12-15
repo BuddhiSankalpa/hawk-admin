@@ -65,7 +65,9 @@ export class SubscribeComponent implements OnInit {
             this.subDetails = value?.content;
           }
         },
-        error: err => {}
+        error: err => {
+          console.log("error sub: " + err)
+        }
       })
   }
 

@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {BrowserModule, Title} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ReactiveFormsModule} from '@angular/forms';
 
-import { NgScrollbarModule } from 'ngx-scrollbar';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 
 // Import routing module
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
 // Import app component
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 
 // Import containers
-import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
+import {DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent} from './containers';
 
 import {
   AvatarModule,
@@ -36,10 +36,11 @@ import {
   UtilitiesModule
 } from '@coreui/angular';
 
-import { IconModule, IconSetService } from '@coreui/icons-angular';
-import {HttpClientModule} from "@angular/common/http";
+import {IconModule, IconSetService} from '@coreui/icons-angular';
+import {HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {LaddaModule} from "angular2-ladda";
+import {authInterceptor} from "./auth/auth.interceptor";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -88,7 +89,10 @@ const APP_CONTAINERS = [
       useClass: HashLocationStrategy
     },
     IconSetService,
-    Title
+    Title,
+    provideHttpClient(
+      withInterceptors([authInterceptor]),
+    )
   ],
   bootstrap: [AppComponent]
 })
