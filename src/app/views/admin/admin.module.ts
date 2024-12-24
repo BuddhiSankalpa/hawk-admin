@@ -25,6 +25,7 @@ import {CardsComponent} from "./cards/cards.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {LaddaModule} from "angular2-ladda";
 import { UpdateModalComponent } from './cards/update-modal/update-modal.component';
+import { CreateStockComponent } from './create-stock/create-stock.component';
 
 
 
@@ -32,7 +33,8 @@ import { UpdateModalComponent } from './cards/update-modal/update-modal.componen
   declarations: [
     AdminComponent,
     CardsComponent,
-    UpdateModalComponent
+    UpdateModalComponent,
+    CreateStockComponent
   ],
   imports: [
     CommonModule,
