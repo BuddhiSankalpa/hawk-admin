@@ -10,6 +10,7 @@ import {authGuard} from "./auth/auth.guard";
 import {OtpComponent} from "./views/pages/otp/otp.component";
 import {ForgetPasswordComponent} from "./views/pages/forget-password/forget-password.component";
 import {ResetPasswordComponent} from "./views/pages/reset-password/reset-password.component";
+import {adminGuard} from "./auth/admin.guard";
 
 const routes: Routes = [
   {
@@ -30,11 +31,12 @@ const routes: Routes = [
       //   loadChildren: () =>
       //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       // },
-      // {
-      //   path: 'theme',
-      //   loadChildren: () =>
-      //     import('./views/theme/theme.module').then((m) => m.ThemeModule)
-      // },
+      {
+        path: 'admin',
+        canActivate: [adminGuard],
+        loadChildren: () =>
+          import('./views/admin/admin.module').then((m) => m.AdminModule)
+      },
       {
         path: 'cards',
         loadChildren: () =>

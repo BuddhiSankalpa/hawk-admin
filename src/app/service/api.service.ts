@@ -68,4 +68,9 @@ export class ApiService {
     const url = `${baseUrl}/auth/user-profile`;
     return this.http.get(url);
   }
+
+  getAllStock(): Observable<any> {
+    const url = `${baseUrl}/stock/all`;
+    return this.http.get(url);
+  }
 }
