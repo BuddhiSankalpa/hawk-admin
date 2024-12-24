@@ -15,12 +15,11 @@ export const navItems: INavData[] = [
   //   url: '/theme/colors',
   //   iconComponent: { name: 'cil-drop' }
   // },
-  // {
-  //   name: 'Typography',
-  //   url: '/theme/typography',
-  //   linkProps: { fragment: 'someAnchor' },
-  //   iconComponent: { name: 'cil-pencil' }
-  // },
+  {
+    name: 'Admin',
+    url: '/admin',
+    iconComponent: { name: 'cil-pencil' }
+  },
   // {
   //   title: true,
   //   name: 'Cards'

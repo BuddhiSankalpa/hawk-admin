@@ -68,4 +68,19 @@ export class ApiService {
     const url = `${baseUrl}/auth/user-profile`;
     return this.http.get(url);
   }
+
+  getAllStock(): Observable<any> {
+    const url = `${baseUrl}/stock/all`;
+    return this.http.get(url);
+  }
+
+  createStock(formData: any): Observable<any> {
+    const url = `${baseUrl}/stock`;
+    return this.http.post(url, formData);
+  }
+
+  updateStock(formData: any, id: any): Observable<any> {
+    const url = `${baseUrl}/stock/${id}`;
+    return this.http.post(url, formData);
+  }
 }

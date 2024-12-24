@@ -49,7 +49,7 @@ export class LoginComponent {
               // sessionStorage.setItem('webapp-user', res.user);
               localStorage.setItem(WEB_TOKEN, res.content.accessToken);
 
-              this.router.navigateByUrl('/cards');
+              this.router.navigateByUrl('/admin');
             } else {
               this.toastr.error(msg);
             }

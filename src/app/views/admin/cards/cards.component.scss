@@ -1,0 +1,100 @@
+.date {
+  font-style: italic;
+  color: grey;
+}
+
+c-card:hover {
+  border-color: #46546c;
+  box-shadow: 0 0 10px 2px #46546c;
+}
+
+.coin-name {
+  font-weight: bold;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .heading {
+    padding: 1px 5px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 2px;
+    color: grey;
+  }
+
+  .text-style {
+    border-radius: 5px;
+    padding: 1px 5px;
+    background-color: #2b812b;
+  }
+
+  .text-contain {
+    color: black;
+  }
+}
+
+.text-bottom {
+  display: block;
+  color: grey;
+  font-style: italic;
+  text-align: right;
+}
+
+c-col {
+  position: relative; /* Ensure positioning context for pseudo-element */
+}
+
+c-col::after {
+  content: ''; /* Required for pseudo-element */
+  position: absolute; /* Position the pseudo-element */
+  top: 20px; /* Add padding at the top */
+  bottom: 20px; /* Add padding at the bottom */
+  right: 0; /* Position the pseudo-element to the right */
+  width: 1px; /* Set the width of the border */
+  background-color: lightgrey; /* Color of the border */
+}
+
+
+// Bootstrap Loading Skeleton
+%loading-skeleton {
+  color: transparent;
+  appearance: none;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  background-color: rgba(128, 128, 128, 0.7);
+  border-color: #eee;
+
+  &::placeholder {
+    color: transparent;
+  }
+}
+@keyframes loading-skeleton {
+  from {
+    opacity: .4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.loading-skeleton {
+  pointer-events: none;
+  animation: loading-skeleton 1s infinite alternate;
+
+  img {
+    filter: grayscale(100) contrast(0%) brightness(1.8);
+  }
+  h1, h2, h3, h4, h5, h6,
+  p, ul, span,
+  ng-container,
+  .btn,
+  label,
+  .form-control {
+    @extend %loading-skeleton;
+  }
+}
+
+p{
+  background-color: gray;
+}

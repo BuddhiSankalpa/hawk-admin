@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class ValidationFormsService {
 
   errorMessages: any;
+  stockUpdateErrorMessages: any;
 
   formRules = {
     nonEmpty: '^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$',
@@ -60,6 +61,32 @@ export class ValidationFormsService {
       city: {
         required: 'City is required'
       }
+    };
+    this.stockUpdateErrorMessages = {
+      name: {
+        required: 'Stock name is required'
+      },
+      description: {
+        required: 'Stock description is required'
+      },
+      stopLoss: {
+        required: 'Stop loss is required'
+      },
+      maxGain: {
+        required: 'Max gain is required'
+      },
+      buyTarget: {
+        required: 'Buy target is required'
+      },
+      sellTarget: {
+        required: 'Sell target is required'
+      },
+      buyZone: {
+        required: 'Buy zone is required'
+      },
+      image: {
+        required: 'Image is required'
+      },
     };
   }
 }

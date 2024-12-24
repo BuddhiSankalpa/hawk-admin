@@ -41,6 +41,8 @@ import {HttpClientModule, provideHttpClient, withInterceptors} from "@angular/co
 import {ToastrModule} from "ngx-toastr";
 import {LaddaModule} from "angular2-ladda";
 import {authInterceptor} from "./auth/auth.interceptor";
+import {AdminModule} from "./views/admin/admin.module";
+import { AdminRoutingModule } from './views/admin/admin-routing.module';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -79,9 +81,11 @@ const APP_CONTAINERS = [
     NgScrollbarModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    AdminModule,
     LaddaModule.forRoot({
       style: "zoom-in"
     }),
+    AdminRoutingModule,
   ],
   providers: [
     {

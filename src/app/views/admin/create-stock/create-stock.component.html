@@ -1,0 +1,227 @@
+<div>
+  <form cForm [formGroup]="createForm" (submit)="createStock()">
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="name">Stock name</label>
+      <c-col *ngIf="createForm.controls['name'] as ctrl" [sm]="8">
+        <input
+          [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+          autocomplete="on"
+          cFormControl
+          formControlName="name"
+          id="name"
+          placeholder="Stock name"
+          required
+        />
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.name.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="description">Description</label>
+      <c-col *ngIf="createForm.controls['description'] as ctrl" [sm]="8">
+          <textarea
+            [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+            autocomplete="on"
+            cFormControl
+            formControlName="description"
+            id="description"
+            placeholder="Description"
+            required></textarea>
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.description.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="stopLoss">Stop Loss</label>
+      <c-col *ngIf="createForm.controls['stopLoss'] as ctrl" [sm]="8">
+        <input
+          [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+          autocomplete="off"
+          cFormControl
+          formControlName="stopLoss"
+          id="stopLoss"
+          placeholder="Stop Loss"
+          type="number"
+          required>
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.stopLoss.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="maxGain">Max Gain</label>
+      <c-col *ngIf="createForm.controls['maxGain'] as ctrl" [sm]="8">
+        <input
+          [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+          autocomplete="off"
+          cFormControl
+          formControlName="maxGain"
+          id="maxGain"
+          placeholder="Max Gain"
+          type="number"
+          required>
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.maxGain.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="buyTarget">Buy Target</label>
+      <c-col *ngIf="createForm.controls['buyTarget'] as ctrl" [sm]="8">
+        <input
+          [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+          autocomplete="off"
+          cFormControl
+          formControlName="buyTarget"
+          id="buyTarget"
+          placeholder="Buy Target"
+          type="number"
+          required>
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.buyTarget.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="sellTarget">Buy Target</label>
+      <c-col *ngIf="createForm.controls['sellTarget'] as ctrl" [sm]="8">
+        <input
+          [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+          autocomplete="off"
+          cFormControl
+          formControlName="sellTarget"
+          id="sellTarget"
+          placeholder="Sell target"
+          type="number"
+          required>
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.sellTarget.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+    <c-row class="mb-1">
+      <label [sm]="4" cCol cLabel="col" for="buyZone">Buy Target</label>
+      <c-col *ngIf="createForm.controls['buyZone'] as ctrl" [sm]="8">
+        <input
+          [valid]="
+              ctrl.touched && ctrl.valid
+                ? true
+                : (submitted || ctrl.touched) && ctrl.invalid
+                ? false
+                : undefined
+            "
+          autocomplete="off"
+          cFormControl
+          formControlName="buyZone"
+          id="buyZone"
+          placeholder="Buy zone"
+          type="number"
+          required>
+        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">
+              {{ formErrors.buyZone.required }}
+            </div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+    </c-row>
+<!--    <c-row class="mb-1">-->
+<!--      <label [sm]="4" cCol cLabel="col" for="image">Image</label>-->
+<!--      <c-col *ngIf="createForm.controls['image'] as ctrl" [sm]="8">-->
+<!--        <input-->
+<!--          [valid]="-->
+<!--              ctrl.touched && ctrl.valid-->
+<!--                ? true-->
+<!--                : (submitted || ctrl.touched) && ctrl.invalid-->
+<!--                ? false-->
+<!--                : undefined-->
+<!--            "-->
+<!--          autocomplete="off"-->
+<!--          cFormControl-->
+<!--          formControlName="image"-->
+<!--          id="image"-->
+<!--          placeholder="Image"-->
+<!--          type="file"-->
+<!--          required>-->
+<!--        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">-->
+<!--          <ng-container *ngIf="ctrl.errors as errors">-->
+<!--            <div *ngIf="errors['required']">-->
+<!--              {{ formErrors.image.required }}-->
+<!--            </div>-->
+<!--          </ng-container>-->
+<!--        </c-form-feedback>-->
+<!--      </c-col>-->
+<!--    </c-row>-->
+    <div class="d-flex justify-content-end">
+      <button cButton type="submit"
+              [disabled]="!createForm.valid"
+              [ladda]="submitted"
+              class="btn btn-primary mt-2 ps-4 pe-4">
+        Create
+      </button>
+    </div>
+  </form>
+</div>

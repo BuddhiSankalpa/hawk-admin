@@ -1,0 +1,25 @@
+<c-nav variant="tabs">
+  <c-nav-item>
+    <a [active]="false" [cTabContent]="tabContent" [tabPaneIdx]="0" cNavLink>Stocks</a>
+  </c-nav-item>
+  <c-nav-item>
+    <a [active]="true" [cTabContent]="tabContent" [tabPaneIdx]="1" cNavLink>Create Stocks</a>
+  </c-nav-item>
+  <c-nav-item>
+    <a [disabled]="true" [cTabContent]="tabContent" [tabPaneIdx]="2" [routerLink] cNavLink>Disabled</a>
+  </c-nav-item>
+</c-nav>
+
+<c-tab-content #tabContent="cTabContent" class="tab-style">
+  <c-tab-pane class="p-3 ps-0 pe-0">
+    <app-cards></app-cards>
+  </c-tab-pane>
+  <c-tab-pane class="p-3">
+    <app-create-stock></app-create-stock>
+  </c-tab-pane>
+  <c-tab-pane class="p-3">
+    This is some placeholder content the <strong>Contact</strong> tab's associated content. Clicking another
+    tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the
+    content visibility and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
+  </c-tab-pane>
+</c-tab-content>
