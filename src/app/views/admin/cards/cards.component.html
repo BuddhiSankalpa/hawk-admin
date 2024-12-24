@@ -1,0 +1,109 @@
+<div *ngIf="!loading" class="container">
+  <div class="row">
+    <ng-container *ngFor="let stock of userStocks">
+      <div class="col-md-6 mb-3">
+        <c-card class="mb-3 pointer-cursor" [ngStyle]="{'max-width.px': 540}" (click)="openModal(stock)">
+          <c-row class="g-0">
+            <c-col [md]="4" class="p-2 d-flex flex-column justify-content-around">
+              <div class="date">
+                Sent: {{ stock?.createdDate | date:'MMM d, yyyy' }}
+              </div>
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-7">
+                  <img [cCardImg] src="./assets/img/coin/alicoin.png" alt="" style="max-width: 100%;">
+                </div>
+                <div class="col-5">
+                  <div class="coin-name">
+                    {{ stock?.name }}Understood
+                  </div>
+                </div>
+              </div>
+              <div>
+                {{ stock?.description }}
+              </div>
+            </c-col>
+            <c-card-body cCol [md]="8">
+              <div class="row">
+                <div class="col-6 mb-3 details">
+                  <div class="heading">
+                    Stop Loss
+                  </div>
+                  <div class="text-contain">
+                    {{ stock?.stopLoss | number:'1.1'}}
+                  </div>
+                </div>
+                <div class="col-6 mb-3 details">
+                  <div class="heading">
+                    Max Gain
+                  </div>
+                  <div class="text-style text-contain">
+                    {{ stock?.maxGain | percent }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6 mb-3 details">
+                  <div class="heading">
+                    Buy Target
+                  </div>
+                  <div class="text-contain">
+                    {{ stock?.buyTarget | number:'1.1'}}
+                  </div>
+                </div>
+                <div class="col-6 mb-3 details">
+                  <div class="heading">
+                    Sell Target
+                  </div>
+                  <div class="text-contain">
+                    <span>{{ stock?.sellTarget | number:'1.1'}}</span>
+                    <!--                    <span>{{100 | number:'1.1'}}</span>/-->
+                    <!--                    <span>{{110 | number:'1.1'}}</span>-->
+                  </div>
+                </div>
+              </div>
+
+              <small class="text-bottom">
+                Value stock, high risk, ideal buy zone within {{stock?.buyZone| percent }} of buy target
+              </small>
+            </c-card-body>
+          </c-row>
+        </c-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+
+<!-- Skeleton Loader -->
+<c-row *ngIf="loading" class="mb-3 ps-3 pe-3" [md]="2" [xs]="1">
+  <div *ngFor="let subPlan of userStocks" class="p-1 loading-skeleton">
+    <c-card class="p-2">
+      <div class="d-flex">
+        <div class="d-flex flex-column justify-content-between gap-1">
+          <p class="m-0" style="height: 20px">Date</p>
+          <p class="m-0" style="height: 90px">Skeleton Img</p>
+          <p class="m-0" style="height: 30px">Skeleton Description</p>
+        </div>
+        <div class="w-100 d-flex flex-column justify-content-between gap-1">
+          <div class="d-flex justify-content-around m-2">
+            <p>100000000</p>
+            <p>100000000</p>
+          </div>
+          <div class="d-flex justify-content-around m-2">
+            <p>100000000</p>
+            <p>100000000</p>
+          </div>
+          <div style="text-align: right">
+            <span>skeleton sample text skeleton sample text</span>
+            <div></div>
+            <span>skeleton sample text</span>
+          </div>
+        </div>
+      </div>
+    </c-card>
+  </div>
+</c-row>
+
+<app-update-modal></app-update-modal>
