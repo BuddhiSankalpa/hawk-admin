@@ -57,7 +57,6 @@ export class UpdateModalComponent {
       buyZone: stock.buyZone || '',
       image: stock.image || '',
     });
-    console.log(this.updateForm.value);
   }
 
   updateStocks() {

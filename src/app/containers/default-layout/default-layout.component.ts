@@ -20,8 +20,8 @@ export class DefaultLayoutComponent {
 
   private filterNavItems() {
     const isAdmin = this.authService.isAdmin(); // Check admin status
-    if (!isAdmin) {
-      this.navItems = this.navItems.filter(item => item.name !== 'Admin');
-    }
+    this.navItems = this.navItems.filter(item =>
+      isAdmin ? item.name !== 'Cards' : item.name !== 'Admin'
+    );
   }
 }

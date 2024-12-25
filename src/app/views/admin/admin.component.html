@@ -1,25 +1,47 @@
-<c-nav variant="tabs">
-  <c-nav-item>
-    <a [active]="false" [cTabContent]="tabContent" [tabPaneIdx]="0" cNavLink>Stocks</a>
-  </c-nav-item>
-  <c-nav-item>
-    <a [active]="true" [cTabContent]="tabContent" [tabPaneIdx]="1" cNavLink>Create Stocks</a>
-  </c-nav-item>
-  <c-nav-item>
-    <a [disabled]="true" [cTabContent]="tabContent" [tabPaneIdx]="2" [routerLink] cNavLink>Disabled</a>
-  </c-nav-item>
-</c-nav>
-
-<c-tab-content #tabContent="cTabContent" class="tab-style">
-  <c-tab-pane class="p-3 ps-0 pe-0">
-    <app-cards></app-cards>
-  </c-tab-pane>
-  <c-tab-pane class="p-3">
-    <app-create-stock></app-create-stock>
-  </c-tab-pane>
-  <c-tab-pane class="p-3">
-    This is some placeholder content the <strong>Contact</strong> tab's associated content. Clicking another
-    tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the
-    content visibility and styling. You can use it with tabs, pills, and any other .nav-powered navigation.
-  </c-tab-pane>
-</c-tab-content>
+<div>
+  <div class="custom-nav">
+    <div>
+      <c-nav variant="tabs" class="nav-with-select">
+        <c-nav-item>
+          <a [active]="activeTab === 0"
+             (click)="activeTab = 0"
+             [cTabContent]="tabContent"
+             [tabPaneIdx]="0"
+             cNavLink>
+            Stocks
+          </a>
+        </c-nav-item>
+        <c-nav-item>
+          <a [active]="true"
+             (click)="activeTab = 1"
+             [cTabContent]="tabContent"
+             [tabPaneIdx]="1"
+             cNavLink>
+            Create Stocks
+          </a>
+        </c-nav-item>
+        <div [class.hidden]="activeTab !== 0" class="custom-select-container">
+          <select id="stockSelection"
+                  name="stockSelection"
+                  class="custom-select"
+                  [disabled]="isFiltering"
+                  (change)="onFilterChange($event)">
+            <option value="" selected class="custom-select-content">All Stocks</option>
+            <option value="silver" class="custom-select-content">Silver</option>
+            <option value="gold" class="custom-select-content">Gold</option>
+            <option value="platinum" class="custom-select-content">Platinum</option>
+            <option value="unassigned" class="custom-select-content">Unassign</option>
+          </select>
+        </div>
+      </c-nav>
+    </div>
+  </div>
+  <c-tab-content #tabContent="cTabContent" class="tab-style">
+    <c-tab-pane class="p-3 ps-0 pe-0">
+      <app-cards></app-cards>
+    </c-tab-pane>
+    <c-tab-pane class="p-3">
+      <app-create-stock></app-create-stock>
+    </c-tab-pane>
+  </c-tab-content>
+</div>

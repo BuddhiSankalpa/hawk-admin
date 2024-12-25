@@ -2,3 +2,87 @@
   border: 1px solid lightgray;
   border-top: none;
 }
+
+.custom-nav {
+  position: sticky;
+  top: 65px;
+  background-color: #ebedef;
+  z-index: 100;
+}
+
+.custom-select-container {
+  margin-left: auto;
+  position: relative;
+  max-width: 200px;
+  flex-shrink: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.custom-select {
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  background-color: #3c4b64;
+  border: 1px solid lightgray;
+  padding: 2px 5px;
+  transition: opacity 0.3s ease;
+
+  &:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: default;
+  }
+}
+
+.custom-select-content {
+  color: grey;
+  background-color: white;
+}
+
+.custom-select-container:hover .custom-select {
+  border-color: #adb5bd;
+}
+
+.custom-select-container.hidden {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.nav-with-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 576px) {
+  c-nav-item > a{
+    padding: 5px 10px;
+    margin: 0;
+  }
+  .custom-select {
+    font-size: 16px;
+    padding: 2px;
+  }
+}
+
+/* Default tab font color */
+c-nav-item {
+  a {
+    color: grey;
+    text-decoration: none;
+  }
+  a.active {
+    color: #007bff; /* Your desired color */
+  }
+}
+

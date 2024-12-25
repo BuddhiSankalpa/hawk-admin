@@ -46,3 +46,12 @@
   font-size: 14px;
 }
 
+/* card styles */
+c-card {
+  box-shadow: 0 0 5px 0 #46546c;
+
+  &:hover {
+    border-color: #46546c;
+    box-shadow: 0 0 10px 2px #46546c;
+  }
+}

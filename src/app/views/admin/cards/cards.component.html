@@ -1,4 +1,4 @@
-<div *ngIf="!loading" class="container">
+<div *ngIf="!loading" class="container z-index-1">
   <div class="row">
     <ng-container *ngFor="let stock of userStocks">
       <div class="col-md-6 mb-3">
@@ -67,6 +67,24 @@
                 Value stock, high risk, ideal buy zone within {{stock?.buyZone| percent }} of buy target
               </small>
             </c-card-body>
+
+            <div class="d-flex justify-content-end p-2 card-bottom">
+              <ng-container *ngFor="let plans of stock.planStocks">
+                <ng-container *ngFor="let key of getKeys(plans)">
+                  <label class="package-label">
+                    {{ plans[key]?.name ? (plans[key]?.name | titlecase) : 'Unassign' }}
+                  </label>
+                </ng-container>
+              </ng-container>
+              <button *ngIf="plans.length !== 0"
+                      (click)="unassignStock($event,stock?.id)"
+                      cButton
+                      color="danger"
+                      size="sm">
+                Unassign
+              </button>
+            </div>
+
           </c-row>
         </c-card>
       </div>
@@ -105,5 +123,11 @@
     </c-card>
   </div>
 </c-row>
+
+<div *ngIf="userStocks.length === 0">
+  <div class="no-stock">
+    No {{ planName | titlecase}} Plans...
+  </div>
+</div>
 
 <app-update-modal></app-update-modal>
