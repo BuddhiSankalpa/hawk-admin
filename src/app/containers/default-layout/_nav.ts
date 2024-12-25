@@ -269,3 +269,13 @@ export const navItems: INavData[] = [
   //   attributes: { target: '_blank' }
   // }
 ];
+
+export const ADMIN_NAV: INavData[] = [
+  { name: 'Admin', url: '/admin', iconComponent: { name: 'cil-pencil' } },
+  { name: 'Subscription', url: '/subscribe', iconComponent: { name: 'cilBell' } },
+];
+
+export const USER_NAV: INavData[] = [
+  { name: 'Cards', url: '/cards', iconComponent: { name: 'cilStar' } },
+  { name: 'Subscription', url: '/subscribe', iconComponent: { name: 'cilBell' } },
+];

@@ -3,8 +3,6 @@
   color: grey;
 }
 
-
-
 .coin-name {
   font-weight: bold;
 }
@@ -99,4 +97,39 @@ p{
   font-size: 14px;
   padding: 4px 8px;
   margin-right: 5px;
+}
+
+.package-btn > button {
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+
+.btnSilver {
+  border: 1px solid grey;
+  color: grey;
+}
+
+.isSilver {
+  background-color: grey;
+  color: white;
+}
+
+.btnGold {
+  border: 1px solid gold;
+  color: gold;
+}
+
+.isGold {
+  background-color: gold;
+  color: black;
+}
+
+.btnPlatinum {
+  border: 1px solid #9f009f;
+  color: #9f009f;
+}
+
+.isPlatinum {
+  background-color: #9f009f;
+  color: white;
 }

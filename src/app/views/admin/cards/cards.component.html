@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-5">
                   <div class="coin-name">
-                    {{ stock?.name }}Understood
+                    {{ stock?.name }}
                   </div>
                 </div>
               </div>
@@ -68,21 +68,28 @@
               </small>
             </c-card-body>
 
-            <div class="d-flex justify-content-end p-2 card-bottom">
-              <ng-container *ngFor="let plans of stock.planStocks">
-                <ng-container *ngFor="let key of getKeys(plans)">
-                  <label class="package-label">
-                    {{ plans[key]?.name ? (plans[key]?.name | titlecase) : 'Unassign' }}
-                  </label>
-                </ng-container>
-              </ng-container>
-              <button *ngIf="plans.length !== 0"
-                      (click)="unassignStock($event,stock?.id)"
-                      cButton
-                      color="danger"
-                      size="sm">
-                Unassign
+            <div class="d-flex justify-content-end p-2 card-bottom gap-1 package-btn">
+              <button class="btnSilver"
+                      [ladda]="getLoadingState(silver_plan_id, stock.id)"
+                      (click)="assignToPlan($event ,silver_plan_id, stock, isSilver(stock?.planStocks))"
+                      [class.isSilver]="isSilver(stock?.planStocks)">
+                Silver
               </button>
+
+              <button class="btnGold"
+                      [ladda]="getLoadingState(gold_plan_id, stock.id)"
+                      (click)="assignToPlan($event ,gold_plan_id, stock, isGold(stock?.planStocks))"
+                      [class.isGold]="isGold(stock?.planStocks)">
+                Gold
+              </button>
+
+              <button class="btnPlatinum"
+                      [ladda]="getLoadingState(platinum_plan_id, stock.id)"
+                      (click)="assignToPlan($event ,platinum_plan_id, stock, isPlatinum(stock?.planStocks))"
+                      [class.isPlatinum]="isPlatinum(stock?.planStocks)">
+                Platinum
+              </button>
+
             </div>
 
           </c-row>
@@ -130,4 +137,4 @@
   </div>
 </div>
 
-<app-update-modal></app-update-modal>
+<app-update-modal (updateSuccess)="filterStocks(null)"></app-update-modal>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationFormsService} from "../../../../service/validation-forms.service";
 import {ApiService} from "../../../../service/api.service";
@@ -12,6 +12,7 @@ import {finalize} from "rxjs";
 })
 export class UpdateModalComponent {
   @Input() stock: any = null;
+  @Output() updateSuccess = new EventEmitter<void>();
   loading: boolean = true;
   updateForm!: FormGroup;
   submitted: boolean = false;
@@ -39,14 +40,13 @@ export class UpdateModalComponent {
         buyTarget: ['', [Validators.required]],
         sellTarget: ['', [Validators.required]],
         buyZone: ['', [Validators.required]],
-        image: ['', [Validators.required]],
+        // image: ['', [Validators.required]],
       }
     );
     this.formControls = Object.keys(this.updateForm.controls);
   }
 
   setFormValues(stock: any) {
-    console.log('stock: ' + stock.value);
     this.updateForm.patchValue({
       name: stock.name || '',
       description: stock.description || '',
@@ -55,7 +55,7 @@ export class UpdateModalComponent {
       buyTarget: stock.buyTarget || '',
       sellTarget: stock.sellTarget || '',
       buyZone: stock.buyZone || '',
-      image: stock.image || '',
+      // image: stock.image || '',
     });
   }
 
@@ -70,6 +70,7 @@ export class UpdateModalComponent {
           if (value?.statusCode === 200) {
             this.toastr.success('Stock updated successfully');
             this.close();
+            this.updateSuccess.emit();
           } else this.toastr.error('Stock update failed. Try again');
         },
         error: err => {

@@ -89,6 +89,16 @@ export class ApiService {
 
   updateStock(formData: any, id: any): Observable<any> {
     const url = `${baseUrl}/stock/${id}`;
-    return this.http.post(url, formData);
+    return this.http.put(url, formData);
+  }
+
+  assignSock(planId: any, stockId: any): Observable<any> {
+    const url = `${baseUrl}/plan-stock/assign/${planId}/${stockId}`;
+    return this.http.put(url, null);
+  }
+
+  unassignSock(planId: any, stockId: any): Observable<any> {
+    const url = `${baseUrl}/plan-stock/unassign/${planId}/${stockId}`;
+    return this.http.put(url, null);
   }
 }

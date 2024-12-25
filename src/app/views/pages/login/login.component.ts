@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {ApiService} from "../../../service/api.service";
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 import {finalize} from "rxjs";
 import {WEB_TOKEN} from "../../../utils/constant";
+import {jwtDecode} from "jwt-decode";
 
 @Component({
   selector: 'app-login',
@@ -19,8 +19,7 @@ export class LoginComponent {
 
   constructor(
     private apiService: ApiService,
-    private toastr: ToastrService,
-    private router: Router
+    private toastr: ToastrService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -43,15 +42,15 @@ export class LoginComponent {
             const msg = res.message;
             if (res.status) {
               this.toastr.success("Login Successful!");
-
-              // this.mainServ.loggedUser = JSON.parse(atob(res.user));
-
-              // sessionStorage.setItem('webapp-user', res.user);
               localStorage.setItem(WEB_TOKEN, res.content.accessToken);
-
-              this.router.navigateByUrl('/admin');
+              const decodedToken = jwtDecode(res.content.accessToken) as { roleCode: string };
+              if (decodedToken && decodedToken.roleCode === 'ADMIN') {
+                window.location.href = '/admin';
+              } else {
+                window.location.href = '/cards';
+              }
             } else {
-              this.toastr.error(msg);
+              this.toastr.error('Login Failed!')
             }
           }
         },

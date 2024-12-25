@@ -19,7 +19,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(clonedReq).pipe(
       tap({
         error: (err) => {
-          console.log("AUTH ERROR: " + err.error.status)
+          console.log("AUTH ERROR: " + err)
           if (err?.error?.status === 403) {
             toast.warning('Session Expired!');
             localStorage.clear();
