@@ -74,3 +74,21 @@
 .active-package {
   box-shadow: 0 0 10px 2px rgb(255 0 0 / 52%);
 }
+
+c-card {
+  box-shadow: 0 0 5px 0 #46546c;
+
+  &:hover {
+    border-color: #46546c;
+    box-shadow: 0 0 10px 2px #46546c;
+  }
+}
+
+.btn-trail {
+  border: 1px solid #3c4b64;
+  background-color: #3c4b64;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

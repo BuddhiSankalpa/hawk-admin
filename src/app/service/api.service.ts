@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {baseUrl} from "../../environment/environment";
 
@@ -69,10 +69,18 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  getAllStock(): Observable<any> {
+  filterStocks(unassigned?: boolean, planId?: string): Observable<any> {
+    let params = new HttpParams();
+    if (unassigned !== undefined) {
+      params = params.set('unassigned', unassigned.toString());
+    }
+    if (planId) {
+      params = params.set('planId', planId);
+    }
     const url = `${baseUrl}/stock/all`;
-    return this.http.get(url);
+    return this.http.get(url, { params });
   }
+
 
   createStock(formData: any): Observable<any> {
     const url = `${baseUrl}/stock`;
@@ -81,6 +89,16 @@ export class ApiService {
 
   updateStock(formData: any, id: any): Observable<any> {
     const url = `${baseUrl}/stock/${id}`;
-    return this.http.post(url, formData);
+    return this.http.put(url, formData);
+  }
+
+  assignSock(planId: any, stockId: any): Observable<any> {
+    const url = `${baseUrl}/plan-stock/assign/${planId}/${stockId}`;
+    return this.http.put(url, null);
+  }
+
+  unassignSock(planId: any, stockId: any): Observable<any> {
+    const url = `${baseUrl}/plan-stock/unassign/${planId}/${stockId}`;
+    return this.http.put(url, null);
   }
 }

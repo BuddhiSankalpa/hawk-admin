@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-
-import { navItems } from './_nav';
+import {Component} from '@angular/core';
+import {navItems} from './_nav';
 import {AuthService} from "../../auth/auth.service";
+import {INavData} from "@coreui/angular";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,18 +10,17 @@ import {AuthService} from "../../auth/auth.service";
 })
 export class DefaultLayoutComponent {
 
-  public navItems = navItems;
+  public navItems: INavData[] = navItems;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthService
   ) {
     this.filterNavItems();
   }
 
-  private filterNavItems() {
+  filterNavItems() {
     const isAdmin = this.authService.isAdmin(); // Check admin status
-    if (!isAdmin) {
-      this.navItems = this.navItems.filter(item => item.name !== 'Admin');
-    }
+    this.navItems = this.navItems
+      .filter(item => isAdmin ? item.name !== 'Cards' : item.name !== 'Admin');
   }
 }

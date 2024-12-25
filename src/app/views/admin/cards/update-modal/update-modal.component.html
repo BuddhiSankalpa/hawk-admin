@@ -9,7 +9,7 @@
             (click)="close()"></button>
   </c-modal-header>
   <c-modal-body>
-    <form cForm [formGroup]="updateForm" (submit)="updateStocks()">
+    <form cForm [formGroup]="updateForm">
       <c-row class="mb-1">
         <label [sm]="4" cCol cLabel="col" for="name">Stock name</label>
         <c-col *ngIf="updateForm.controls['name'] as ctrl" [sm]="8">
@@ -198,33 +198,33 @@
           </c-form-feedback>
         </c-col>
       </c-row>
-      <c-row class="mb-1">
-        <label [sm]="4" cCol cLabel="col" for="image">Image</label>
-        <c-col *ngIf="updateForm.controls['image'] as ctrl" [sm]="8">
-          <input
-            [valid]="
-              ctrl.touched && ctrl.valid
-                ? true
-                : (submitted || ctrl.touched) && ctrl.invalid
-                ? false
-                : undefined
-            "
-            autocomplete="off"
-            cFormControl
-            formControlName="image"
-            id="image"
-            placeholder="Image"
-            type="file"
-            required>
-          <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">
-            <ng-container *ngIf="ctrl.errors as errors">
-              <div *ngIf="errors['required']">
-                {{ formErrors.image.required }}
-              </div>
-            </ng-container>
-          </c-form-feedback>
-        </c-col>
-      </c-row>
+<!--      <c-row class="mb-1">-->
+<!--        <label [sm]="4" cCol cLabel="col" for="image">Image</label>-->
+<!--        <c-col *ngIf="updateForm.controls['image'] as ctrl" [sm]="8">-->
+<!--          <input-->
+<!--            [valid]="-->
+<!--              ctrl.touched && ctrl.valid-->
+<!--                ? true-->
+<!--                : (submitted || ctrl.touched) && ctrl.invalid-->
+<!--                ? false-->
+<!--                : undefined-->
+<!--            "-->
+<!--            autocomplete="off"-->
+<!--            cFormControl-->
+<!--            formControlName="image"-->
+<!--            id="image"-->
+<!--            placeholder="Image"-->
+<!--            type="file"-->
+<!--            required>-->
+<!--          <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">-->
+<!--            <ng-container *ngIf="ctrl.errors as errors">-->
+<!--              <div *ngIf="errors['required']">-->
+<!--                {{ formErrors.image.required }}-->
+<!--              </div>-->
+<!--            </ng-container>-->
+<!--          </c-form-feedback>-->
+<!--        </c-col>-->
+<!--      </c-row>-->
     </form>
   </c-modal-body>
   <c-modal-footer class="pt-1 pb-1">
@@ -232,9 +232,10 @@
       Cancel
     </button>
     <button cButton color="primary"
+            (click)="updateStocks()"
             [ladda]="submitted"
             [disabled]="updateForm.invalid"
-            type="submit">
+            type="button">
       Update
     </button>
   </c-modal-footer>

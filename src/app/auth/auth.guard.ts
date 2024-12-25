@@ -4,7 +4,7 @@ import {AuthService} from "./auth.service";
 import {AppService} from "../service/app.service";
 import {WEB_USER} from "../utils/constant";
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
 
   const auth = inject(AuthService);
   const router = inject(Router);

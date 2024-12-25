@@ -1,4 +1,4 @@
-<div *ngIf="!loading" class="container">
+<div *ngIf="!loading" class="container z-index-1">
   <div class="row">
     <ng-container *ngFor="let stock of userStocks">
       <div class="col-md-6 mb-3">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-5">
                   <div class="coin-name">
-                    {{ stock?.name }}Understood
+                    {{ stock?.name }}
                   </div>
                 </div>
               </div>
@@ -67,6 +67,31 @@
                 Value stock, high risk, ideal buy zone within {{stock?.buyZone| percent }} of buy target
               </small>
             </c-card-body>
+
+            <div class="d-flex justify-content-end p-2 card-bottom gap-1 package-btn">
+              <button class="btnSilver"
+                      [ladda]="getLoadingState(silver_plan_id, stock.id)"
+                      (click)="assignToPlan($event ,silver_plan_id, stock, isSilver(stock?.planStocks))"
+                      [class.isSilver]="isSilver(stock?.planStocks)">
+                Silver
+              </button>
+
+              <button class="btnGold"
+                      [ladda]="getLoadingState(gold_plan_id, stock.id)"
+                      (click)="assignToPlan($event ,gold_plan_id, stock, isGold(stock?.planStocks))"
+                      [class.isGold]="isGold(stock?.planStocks)">
+                Gold
+              </button>
+
+              <button class="btnPlatinum"
+                      [ladda]="getLoadingState(platinum_plan_id, stock.id)"
+                      (click)="assignToPlan($event ,platinum_plan_id, stock, isPlatinum(stock?.planStocks))"
+                      [class.isPlatinum]="isPlatinum(stock?.planStocks)">
+                Platinum
+              </button>
+
+            </div>
+
           </c-row>
         </c-card>
       </div>
@@ -106,4 +131,10 @@
   </div>
 </c-row>
 
-<app-update-modal></app-update-modal>
+<div *ngIf="userStocks.length === 0">
+  <div class="no-stock">
+    No {{ planName | titlecase}} Plans...
+  </div>
+</div>
+
+<app-update-modal (updateSuccess)="filterStocks(null)"></app-update-modal>

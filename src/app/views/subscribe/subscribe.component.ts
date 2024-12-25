@@ -4,6 +4,7 @@ import {ApiService} from "../../service/api.service";
 import {finalize} from "rxjs";
 import {cilCheckCircle} from "@coreui/icons";
 import {ToastrService} from "ngx-toastr";
+import {WEB_USER} from "../../utils/constant";
 
 @Component({
   selector: 'app-subscribe',
@@ -60,7 +61,7 @@ export class SubscribeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user = sessionStorage.getItem('user-details');
+    const user = sessionStorage.getItem(WEB_USER);
     if (user) {
       this.packageId = JSON.parse(user).plan
     }

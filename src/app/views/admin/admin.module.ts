@@ -26,6 +26,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {LaddaModule} from "angular2-ladda";
 import { UpdateModalComponent } from './cards/update-modal/update-modal.component';
 import { CreateStockComponent } from './create-stock/create-stock.component';
+import {IconDirective} from "@coreui/icons-angular";
 
 
 
@@ -66,7 +67,8 @@ import { CreateStockComponent } from './create-stock/create-stock.component';
     FormFeedbackComponent,
     FormLabelDirective,
     ReactiveFormsModule,
-    LaddaModule
+    LaddaModule,
+    IconDirective
   ]
 })
 export class AdminModule { }
