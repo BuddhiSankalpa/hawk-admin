@@ -11,6 +11,7 @@ import {OtpComponent} from "./views/pages/otp/otp.component";
 import {ForgetPasswordComponent} from "./views/pages/forget-password/forget-password.component";
 import {ResetPasswordComponent} from "./views/pages/reset-password/reset-password.component";
 import {adminGuard} from "./auth/admin.guard";
+import {userGuard} from "./auth/user.guard";
 
 const routes: Routes = [
   // {
@@ -39,7 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'cards',
-        canActivate: [!authGuard],
+        canActivate: [userGuard],
         loadChildren: () =>
           import('./views/cards/cards.module').then((m) => m.CardsModule)
       },
