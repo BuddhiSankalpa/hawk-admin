@@ -13,11 +13,11 @@ import {ResetPasswordComponent} from "./views/pages/reset-password/reset-passwor
 import {adminGuard} from "./auth/admin.guard";
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'cards',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'cards',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -39,6 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'cards',
+        canActivate: [!authGuard],
         loadChildren: () =>
           import('./views/cards/cards.module').then((m) => m.CardsModule)
       },
@@ -138,7 +139,7 @@ const routes: Routes = [
       title: 'Reset Password Page'
     }
   },
-  {path: '**', redirectTo: 'cards'}
+  // {path: '**', redirectTo: 'cards'}
 ];
 
 @NgModule({

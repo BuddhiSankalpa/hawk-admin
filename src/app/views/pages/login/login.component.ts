@@ -43,12 +43,13 @@ export class LoginComponent {
             if (res.status) {
               this.toastr.success("Login Successful!");
               localStorage.setItem(WEB_TOKEN, res.content.accessToken);
-              const decodedToken = jwtDecode(res.content.accessToken) as { roleCode: string };
-              if (decodedToken && decodedToken.roleCode === 'ADMIN') {
-                window.location.href = '/admin';
-              } else {
-                window.location.href = '/cards';
-              }
+              // const decodedToken = jwtDecode(res.content.accessToken) as { roleCode: string };
+              // if (decodedToken && decodedToken.roleCode === 'ADMIN') {
+              //   window.location.href = '/admin';
+              // } else {
+              //   window.location.href = '/cards';
+              // }
+              window.location.href = '';
             } else {
               this.toastr.error('Login Failed!')
             }
