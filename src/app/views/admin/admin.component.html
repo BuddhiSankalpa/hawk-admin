@@ -25,8 +25,9 @@
                   name="stockSelection"
                   class="custom-select"
                   [disabled]="isFiltering"
+                  [(ngModel)]="stockSelection"
                   (change)="onFilterChange($event)">
-            <option value="all" selected class="custom-select-content">All Stocks</option>
+            <option value="all" class="custom-select-content">All Stocks</option>
             <option value="silver" class="custom-select-content">Silver</option>
             <option value="gold" class="custom-select-content">Gold</option>
             <option value="platinum" class="custom-select-content">Platinum</option>

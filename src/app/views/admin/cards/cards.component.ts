@@ -4,6 +4,9 @@ import {finalize} from "rxjs";
 import {UpdateModalComponent} from "./update-modal/update-modal.component";
 import {gold_plan_id, platinum_plan_id, silver_plan_id} from "../../../../environment/environment";
 import {ToastrService} from "ngx-toastr";
+import {ActivatedRoute} from "@angular/router";
+import {AppService} from "../../../service/app.service";
+import {admin} from "../../../app-routing.module";
 
 @Component({
   selector: 'app-cards',
@@ -32,31 +35,23 @@ export class CardsComponent implements OnInit {
   ];
   planName: any;
   currentPage: number = 0;
-  totalPages: number = 2;
-  visiblePages: number[] = [0,1];
+  totalPages: number = 1;
+  visiblePages: number[] = [];
 
   constructor(
     private apiService: ApiService,
     private toaster: ToastrService,
+    private route: ActivatedRoute,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {
-    // this.filterStocks({target: {value: 'all'}}, 0, true);
-    this.userStocks = [
-      {
-        "id": "9e20425254e112421b7ce1102f0db5d2",
-        "name": "Test 12",
-        "description": "A high-performing agri company stock",
-        "stopLoss": 150.00,
-        "maxGain": 400.50,
-        "buyTarget": 360.00,
-        "sellTarget": 150.00,
-        "buyZone": 160.00,
-        "imageUrl": null,
-        "createdDate": "2024-12-27T21:52:08.539202",
-        "planStocks": []
-      }
-    ]
+    // Subscribe to query parameters
+    this.route.queryParams.subscribe((params) => {
+      this.currentPage = params['page'] ? parseInt(params['page'], 10) : 0;
+      this.planName = params['filter'] ? params['filter'] : 'all';
+      this.filterStocks(this.planName, this.currentPage, false);
+    });
   }
 
   openModal(stock: any) {
@@ -71,6 +66,7 @@ export class CardsComponent implements OnInit {
     let selectedValue: any;
     if (isFilter){
       selectedValue = event?.target?.value;
+      page = 0;
     } else {
       selectedValue = event
     }
@@ -79,7 +75,7 @@ export class CardsComponent implements OnInit {
     let planId: string | undefined = undefined;
 
     if (selectedValue === 'all') {
-      // All stocks, no filters
+      this.planName = 'all'
     } else if (selectedValue === 'unassigned') {
       unassigned = true;
       this.planName = selectedValue;
@@ -87,7 +83,7 @@ export class CardsComponent implements OnInit {
       planId = this.plans.find((plan: { name: string }) => plan.name === selectedValue)?.id;
       this.planName = selectedValue;
     }
-
+    this.appService.updateUrl(page, admin, { filter: this.planName})
     this.apiService.filterStocks(unassigned, planId, page)
       .pipe(
         finalize(() => {
@@ -99,9 +95,7 @@ export class CardsComponent implements OnInit {
         next: value => {
           if (value?.statusCode === 200) {
             this.userStocks = value?.content?.content;
-            this.currentPage = value?.content?.pageable?.pageNumber;
-            this.totalPages = value?.content?.totalPages;
-            this.updateVisiblePages()
+            this.updateVisiblePages(value?.content)
           }
         },
         error: err => {
@@ -124,7 +118,6 @@ export class CardsComponent implements OnInit {
         .subscribe({
           next: value => {
             if (value?.statusCode === 200) {
-              // this.filterStocks({ target: { value: 'all' } });
               this.toaster.success('Assigned plan successfully!');
               if (planId === silver_plan_id) {
                 updateStock.planStocks.push({
@@ -205,7 +198,10 @@ export class CardsComponent implements OnInit {
   }
 
   // Update the visible pages in the pagination to always show 3 pages
-  updateVisiblePages(): void {
+  updateVisiblePages(request: any): void {
+    this.currentPage = request?.pageable?.pageNumber;
+    this.totalPages = request?.totalPages;
+
     let startPage = this.currentPage - 1;  // Show the previous page
     let endPage = this.currentPage + 1;    // Show the next page
 
@@ -230,6 +226,7 @@ export class CardsComponent implements OnInit {
     // Ensure the page range is valid
     this.visiblePages = [startPage, this.currentPage, endPage].filter(page => page >= 0 && page < this.totalPages);
   }
+
   protected readonly silver_plan_id = silver_plan_id;
   protected readonly gold_plan_id = gold_plan_id;
   protected readonly platinum_plan_id = platinum_plan_id;

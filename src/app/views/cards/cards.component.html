@@ -105,3 +105,24 @@
     </c-card>
   </div>
 </c-row>
+
+
+<!-- Pagination Controls -->
+<nav aria-label="Pagination" class=" ps-2 pe-2">
+  <ul class="pagination">
+    <!-- Previous Button -->
+    <li class="page-item" [class.disabled]="currentPage === 0">
+      <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+    </li>
+
+    <!-- Dynamic Page Numbers (always 3 pages) -->
+    <li *ngFor="let page of visiblePages" class="page-item" [class.active]="page === currentPage">
+      <button class="page-link" (click)="changePage(page)">{{ page + 1 }}</button>
+    </li>
+
+    <!-- Next Button -->
+    <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+      <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+    </li>
+  </ul>
+</nav>

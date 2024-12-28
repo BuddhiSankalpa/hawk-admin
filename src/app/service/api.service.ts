@@ -59,8 +59,8 @@ export class ApiService {
     return this.http.post(url, null, { responseType: 'text' });
   }
 
-  getUserStock(): Observable<any> {
-    const url = `${baseUrl}/user-stock/all`;
+  getUserStock(page: any): Observable<any> {
+    const url = `${baseUrl}/user-stock/all?page=${page}`;
     return this.http.get(url);
   }
 

@@ -13,6 +13,9 @@ import {ResetPasswordComponent} from "./views/pages/reset-password/reset-passwor
 import {adminGuard} from "./auth/admin.guard";
 import {userGuard} from "./auth/user.guard";
 
+export const admin = 'admin';
+export const cards = 'cards';
+
 const routes: Routes = [
   // {
   //   path: '',
@@ -33,7 +36,7 @@ const routes: Routes = [
       //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       // },
       {
-        path: 'admin',
+        path: admin,
         canActivate: [adminGuard],
         loadChildren: () =>
           import('./views/admin/admin.module').then((m) => m.AdminModule)
