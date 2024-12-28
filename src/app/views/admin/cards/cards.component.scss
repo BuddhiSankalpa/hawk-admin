@@ -1,3 +1,5 @@
+@import "variables";
+
 .date {
   font-style: italic;
   color: grey;
@@ -132,4 +134,8 @@ p{
 .isPlatinum {
   background-color: #9f009f;
   color: white;
+}
+
+nav> ul > li.active {
+  background-color: rgba(200, 3, 3, 0.97) !important; /* Ensure the text color is overridden */
 }

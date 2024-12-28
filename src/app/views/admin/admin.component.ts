@@ -22,6 +22,6 @@ export class AdminComponent implements AfterViewInit{
   }
 
   onFilterChange(event: any) {
-    this.cardComponent.filterStocks(event)
+    this.cardComponent.filterStocks(event, 0, true)
   }
 }

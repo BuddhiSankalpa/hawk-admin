@@ -31,6 +31,9 @@ export class CardsComponent implements OnInit {
     }
   ];
   planName: any;
+  currentPage: number = 0;
+  totalPages: number = 2;
+  visiblePages: number[] = [0,1];
 
   constructor(
     private apiService: ApiService,
@@ -38,7 +41,22 @@ export class CardsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filterStocks({ target: { value: 'all' } });
+    // this.filterStocks({target: {value: 'all'}}, 0, true);
+    this.userStocks = [
+      {
+        "id": "9e20425254e112421b7ce1102f0db5d2",
+        "name": "Test 12",
+        "description": "A high-performing agri company stock",
+        "stopLoss": 150.00,
+        "maxGain": 400.50,
+        "buyTarget": 360.00,
+        "sellTarget": 150.00,
+        "buyZone": 160.00,
+        "imageUrl": null,
+        "createdDate": "2024-12-27T21:52:08.539202",
+        "planStocks": []
+      }
+    ]
   }
 
   openModal(stock: any) {
@@ -46,11 +64,16 @@ export class CardsComponent implements OnInit {
     this.updateModal.open();
   }
 
-  filterStocks(event: any) {
+  filterStocks(event: any, page: any, isFilter: boolean) {
     this.loading = true;
     this.loadingChange.emit(this.loading); // Emit loading state
     this.userStocks = Array(10).fill(null);
-    const selectedValue: any = event?.target?.value;
+    let selectedValue: any;
+    if (isFilter){
+      selectedValue = event?.target?.value;
+    } else {
+      selectedValue = event
+    }
 
     let unassigned: boolean | undefined = undefined;
     let planId: string | undefined = undefined;
@@ -65,7 +88,7 @@ export class CardsComponent implements OnInit {
       this.planName = selectedValue;
     }
 
-    this.apiService.filterStocks(unassigned, planId)
+    this.apiService.filterStocks(unassigned, planId, page)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -76,6 +99,9 @@ export class CardsComponent implements OnInit {
         next: value => {
           if (value?.statusCode === 200) {
             this.userStocks = value?.content?.content;
+            this.currentPage = value?.content?.pageable?.pageNumber;
+            this.totalPages = value?.content?.totalPages;
+            this.updateVisiblePages()
           }
         },
         error: err => {
@@ -169,6 +195,41 @@ export class CardsComponent implements OnInit {
     return this.loadingStates[key] || false;
   }
 
+  // Change page when clicking on pagination buttons
+  changePage(page: number): void {
+    if (page < 0 || page >= this.totalPages) {
+      return; // Prevent going out of bounds
+    }
+    this.currentPage = page;
+    this.filterStocks(this.planName, page, false); // Fetch the new page data
+  }
+
+  // Update the visible pages in the pagination to always show 3 pages
+  updateVisiblePages(): void {
+    let startPage = this.currentPage - 1;  // Show the previous page
+    let endPage = this.currentPage + 1;    // Show the next page
+
+    // Ensure the first page is always shown as 1
+    if (this.currentPage === 0) {
+      startPage = 1;
+      endPage = 2;
+      this.visiblePages = [this.currentPage, startPage, endPage].filter(page => page >= 0 && page < this.totalPages);
+      return;
+    }
+
+    // Ensure the last page is within range
+    else if (this.currentPage === this.totalPages - 1) {
+      if (this.totalPages < 3 ){
+        this.visiblePages = [0, 1];
+        return;
+      }
+      endPage = this.totalPages - 1;
+      startPage = Math.max(0, this.totalPages - 3);
+    }
+
+    // Ensure the page range is valid
+    this.visiblePages = [startPage, this.currentPage, endPage].filter(page => page >= 0 && page < this.totalPages);
+  }
   protected readonly silver_plan_id = silver_plan_id;
   protected readonly gold_plan_id = gold_plan_id;
   protected readonly platinum_plan_id = platinum_plan_id;

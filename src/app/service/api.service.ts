@@ -69,7 +69,7 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  filterStocks(unassigned?: boolean, planId?: string): Observable<any> {
+  filterStocks(unassigned?: boolean, planId?: string, page?: any): Observable<any> {
     let params = new HttpParams();
     if (unassigned !== undefined) {
       params = params.set('unassigned', unassigned.toString());
@@ -77,7 +77,7 @@ export class ApiService {
     if (planId) {
       params = params.set('planId', planId);
     }
-    const url = `${baseUrl}/stock/all`;
+    const url = `${baseUrl}/stock/all?page=${page}`;
     return this.http.get(url, { params });
   }
 
