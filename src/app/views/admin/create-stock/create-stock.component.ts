@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationFormsService} from "../../../service/validation-forms.service";
 import {ApiService} from "../../../service/api.service";
@@ -11,6 +11,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrl: './create-stock.component.scss'
 })
 export class CreateStockComponent {
+  @Output() createChange = new EventEmitter<boolean>();
   createForm!: FormGroup;
   submitted: boolean = false;
   formErrors: any;
@@ -51,6 +52,7 @@ export class CreateStockComponent {
           if (value?.statusCode === 200) {
             this.toastr.success('Stock created successfully');
             this.createForm.reset();
+            this.createChange.emit();
           } else this.toastr.error('Stock creation failed. Try again');
         },
         error: err => {

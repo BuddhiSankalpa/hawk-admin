@@ -26,3 +26,27 @@ $enable-rtl: true;
 .non-selectable {
   user-select: none;
 }
+
+.page-link {
+  color: $theme-color;
+
+  .page-item {
+    background-color: #2b812b;
+  }
+
+  .page-item:hover & {
+   color: $theme-color;
+  }
+
+  // Active state
+  .page-item.active & {
+    background-color: $theme-color;
+    border-color: $theme-color;
+    color: white;
+  }
+
+  // Disabled state
+  .page-item.disabled &{
+    color: lightgrey;
+  }
+}

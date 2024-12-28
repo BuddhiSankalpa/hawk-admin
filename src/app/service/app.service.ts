@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import {Location} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
+
+  constructor(
+    private location:  Location
+  ) {
+  }
 
   loggedUser: any;
   private readonly STORAGE_KEY = 'resetData';
@@ -21,4 +27,18 @@ export class AppService {
   clearResetData(): void {
     sessionStorage.removeItem(this.STORAGE_KEY);
   }
+
+  updateUrl(page: number, urlString: string, filters: Record<string, any> = {}): void {
+    const queryParams = this.buildQueryParams({ page, ...filters });
+    const finalUrl = `/${urlString}?${queryParams}`;
+    this.location.go(finalUrl);
+  }
+
+  buildQueryParams(queryParams: Record<string, any>): string {
+    const queryParamsArray = Object.entries(queryParams)
+      .filter(([_, value]) => value !== null && value !== undefined)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+    return queryParamsArray.join('&');
+  }
+
 }

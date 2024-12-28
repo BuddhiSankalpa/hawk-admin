@@ -41,6 +41,9 @@
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ladda/dist/ladda-themeless.min.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/scss"]
+            },
             "scripts": [],
             "allowedCommonJsDependencies": [
               "chart.js"

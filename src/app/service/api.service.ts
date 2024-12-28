@@ -59,8 +59,8 @@ export class ApiService {
     return this.http.post(url, null, { responseType: 'text' });
   }
 
-  getUserStock(): Observable<any> {
-    const url = `${baseUrl}/user-stock/all`;
+  getUserStock(page: any): Observable<any> {
+    const url = `${baseUrl}/user-stock/all?page=${page}`;
     return this.http.get(url);
   }
 
@@ -69,7 +69,7 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  filterStocks(unassigned?: boolean, planId?: string): Observable<any> {
+  filterStocks(unassigned?: boolean, planId?: string, page?: any): Observable<any> {
     let params = new HttpParams();
     if (unassigned !== undefined) {
       params = params.set('unassigned', unassigned.toString());
@@ -77,7 +77,7 @@ export class ApiService {
     if (planId) {
       params = params.set('planId', planId);
     }
-    const url = `${baseUrl}/stock/all`;
+    const url = `${baseUrl}/stock/all?page=${page}`;
     return this.http.get(url, { params });
   }
 

@@ -22,7 +22,7 @@ import {
 } from "@coreui/angular";
 import {AnalysisComponent} from "../cards/analysis/analysis.component";
 import {CardsComponent} from "./cards/cards.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LaddaModule} from "angular2-ladda";
 import { UpdateModalComponent } from './cards/update-modal/update-modal.component';
 import { CreateStockComponent } from './create-stock/create-stock.component';
@@ -37,38 +37,39 @@ import {IconDirective} from "@coreui/icons-angular";
     UpdateModalComponent,
     CreateStockComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    CardBodyComponent,
-    CardComponent,
-    ColComponent,
-    ColDirective,
-    RowComponent,
-    CardImgDirective,
-    NavComponent,
-    NavItemComponent,
-    NavLinkDirective,
-    DropdownComponent,
-    AnalysisComponent,
-    TabPaneComponent,
-    TabContentComponent,
-    TabContentRefDirective,
-    ModalComponent,
-    ModalHeaderComponent,
-    ModalToggleDirective,
-    ModalBodyComponent,
-    ModalFooterComponent,
-    ButtonCloseDirective,
-    ButtonDirective,
-    ModalTitleDirective,
-    FormControlDirective,
-    FormDirective,
-    FormFeedbackComponent,
-    FormLabelDirective,
-    ReactiveFormsModule,
-    LaddaModule,
-    IconDirective
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        CardBodyComponent,
+        CardComponent,
+        ColComponent,
+        ColDirective,
+        RowComponent,
+        CardImgDirective,
+        NavComponent,
+        NavItemComponent,
+        NavLinkDirective,
+        DropdownComponent,
+        AnalysisComponent,
+        TabPaneComponent,
+        TabContentComponent,
+        TabContentRefDirective,
+        ModalComponent,
+        ModalHeaderComponent,
+        ModalToggleDirective,
+        ModalBodyComponent,
+        ModalFooterComponent,
+        ButtonCloseDirective,
+        ButtonDirective,
+        ModalTitleDirective,
+        FormControlDirective,
+        FormDirective,
+        FormFeedbackComponent,
+        FormLabelDirective,
+        ReactiveFormsModule,
+        LaddaModule,
+        IconDirective,
+        FormsModule
+    ]
 })
 export class AdminModule { }

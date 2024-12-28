@@ -78,7 +78,7 @@
 
 <!-- Skeleton Loader -->
 <c-row *ngIf="loading" class="mb-3 pt-1" [md]="2" [xs]="1">
-  <div *ngFor="let subPlan of userStocks" class="p-1 loading-skeleton">
+  <div *ngFor="let subPlan of userStocks" class="p-3 loading-skeleton">
     <c-card class="p-2">
       <div class="d-flex">
         <div class="d-flex flex-column justify-content-between gap-1">
@@ -105,3 +105,24 @@
     </c-card>
   </div>
 </c-row>
+
+
+<!-- Pagination Controls -->
+<nav aria-label="Pagination" class=" ps-2 pe-2">
+  <ul class="pagination">
+    <!-- Previous Button -->
+    <li class="page-item" [class.disabled]="currentPage === 0">
+      <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+    </li>
+
+    <!-- Dynamic Page Numbers (always 3 pages) -->
+    <li *ngFor="let page of visiblePages" class="page-item" [class.active]="page === currentPage">
+      <button class="page-link" (click)="changePage(page)">{{ page + 1 }}</button>
+    </li>
+
+    <!-- Next Button -->
+    <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+      <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+    </li>
+  </ul>
+</nav>

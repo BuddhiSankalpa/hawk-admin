@@ -11,13 +11,17 @@ import {OtpComponent} from "./views/pages/otp/otp.component";
 import {ForgetPasswordComponent} from "./views/pages/forget-password/forget-password.component";
 import {ResetPasswordComponent} from "./views/pages/reset-password/reset-password.component";
 import {adminGuard} from "./auth/admin.guard";
+import {userGuard} from "./auth/user.guard";
+
+export const admin = 'admin';
+export const cards = 'cards';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'cards',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'cards',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -32,13 +36,14 @@ const routes: Routes = [
       //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       // },
       {
-        path: 'admin',
+        path: admin,
         canActivate: [adminGuard],
         loadChildren: () =>
           import('./views/admin/admin.module').then((m) => m.AdminModule)
       },
       {
         path: 'cards',
+        canActivate: [userGuard],
         loadChildren: () =>
           import('./views/cards/cards.module').then((m) => m.CardsModule)
       },
@@ -138,7 +143,7 @@ const routes: Routes = [
       title: 'Reset Password Page'
     }
   },
-  {path: '**', redirectTo: 'cards'}
+  // {path: '**', redirectTo: 'cards'}
 ];
 
 @NgModule({
