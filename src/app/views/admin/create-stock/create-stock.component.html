@@ -211,33 +211,73 @@
         </c-form-feedback>
       </c-col>
     </c-row>
-<!--    <c-row class="mb-1">-->
-<!--      <label [sm]="3" cCol cLabel="col" for="image">Image</label>-->
-<!--      <c-col *ngIf="createForm.controls['image'] as ctrl" [sm]="9">-->
-<!--        <input-->
-<!--          [valid]="-->
-<!--              ctrl.touched && ctrl.valid-->
-<!--                ? true-->
-<!--                : (submitted || ctrl.touched) && ctrl.invalid-->
-<!--                ? false-->
-<!--                : undefined-->
-<!--            "-->
-<!--          autocomplete="off"-->
-<!--          cFormControl-->
-<!--          formControlName="image"-->
-<!--          id="image"-->
-<!--          placeholder="Image"-->
-<!--          type="file"-->
-<!--          required>-->
-<!--        <c-form-feedback *ngIf="submitted || ctrl.invalid" [valid]="!(submitted || ctrl.invalid)">-->
-<!--          <ng-container *ngIf="ctrl.errors as errors">-->
-<!--            <div *ngIf="errors['required']">-->
-<!--              {{ formErrors.image.required }}-->
-<!--            </div>-->
-<!--          </ng-container>-->
-<!--        </c-form-feedback>-->
-<!--      </c-col>-->
-<!--    </c-row>-->
+
+    <c-row class="mb-1">
+      <label [sm]="3" cCol cLabel="col" for="buyZone" class="label-style">
+        <svg cIcon name="cilChevronCircleRightAlt" size="sm" title="Numbered List Icon"></svg>
+        Image
+      </label>
+      <c-col *ngIf="createForm.controls['imageUrl'] as ctrl" [sm]="9">
+        <div id="imageUpload">
+          <div class="image-upload position-relative" [ngClass]="{ 'no-image': !selectedImage.src && ctrl.touched}">
+            <!-- Loading Spinner for Update -->
+            <div *ngIf="isUpdate" class="position-absolute z-3 loadingUpdate">
+              <img alt="loading..." src="assets/loading_io/Spin-1s-200px.svg">
+            </div>
+
+            <!-- Drag & Drop or File Selection Area -->
+            <div (dragleave)="onDragLeave($event)"
+                 (dragover)="onDragOver($event)"
+                 (drop)="onDrop($event)"
+                 (click)="triggerFileInput(ctrl)"
+                 class="drop-zone">
+              <div *ngIf="selectedImage.src" class="d-flex flex-wrap gap-2 justify-content-center mb-1">
+                <!-- Display Uploaded Images -->
+                <div class="image-container position-relative">
+                  <div *ngIf="selectedImage.isLoading" class="position-absolute z-3 loading">
+                    <img alt="loading..." src="assets/loading_io/Spin-1s-200px.svg">
+                  </div>
+                  <span (click)="removeImage($event)" class="position-absolute bottom-0 end-0">
+                    <svg class="delete-image material-symbols-outlined"
+                         cIcon name="cilTrash" size="xl">
+                    </svg>
+                  </span>
+                  <img [src]="selectedImage?.src" alt="Selected Image" draggable="false">
+                </div>
+              </div>
+
+              <!-- Placeholder for Drag & Drop -->
+              <div *ngIf="!selectedImage.src" class="d-flex justify-content-center">
+                <div id="imageTemplate"></div>
+              </div>
+              <div *ngIf="!selectedImage.src" class="p-3">Drag & drop images here or click to select</div>
+
+              <!-- Hidden File Input -->
+              <div>
+                <input
+                  #upload
+                  (change)="onFileSelected($event, ctrl)"
+                  accept="image/*"
+                  class="hidden-file-input"
+                  id="upload"
+                  type="file"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Error Message -->
+        <div *ngIf="ctrl.touched && !selectedImage?.src" class="error-text">
+          <ng-container *ngIf="ctrl.errors as errors">
+            <small *ngIf="errors['required']" style="color: #e55757;">
+              {{ formErrors.image.required }}
+            </small>
+          </ng-container>
+        </div>
+      </c-col>
+    </c-row>
+
+
     <div class="d-flex justify-content-end">
       <button cButton type="submit"
               [disabled]="!createForm.valid"

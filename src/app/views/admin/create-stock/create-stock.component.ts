@@ -16,6 +16,9 @@ export class CreateStockComponent {
   submitted: boolean = false;
   formErrors: any;
   formControls!: string[];
+  selectedImage: { src: any; isLoading: boolean } = { src: null, isLoading: false };
+  isUpdate = false; // To toggle the loading spinner
+  submit = false; // Indicates if the form has been submitted
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,7 +40,7 @@ export class CreateStockComponent {
         buyTarget: ['', [Validators.required]],
         sellTarget: ['', [Validators.required]],
         buyZone: ['', [Validators.required]],
-        // image: ['', [Validators.required]],
+        imageUrl: ['', [Validators.required]],
       }
     );
     this.formControls = Object.keys(this.createForm.controls);
@@ -59,5 +62,66 @@ export class CreateStockComponent {
           this.toastr.error('Stock creation failed. Try again');
         }
       })
+  }
+
+  // Reference to the file input
+  triggerFileInput(ctrl: any): void {
+    const fileInput = document.getElementById('upload') as HTMLInputElement;
+    fileInput.click(); // Simulate a click on the file input
+    ctrl.markAsTouched();
+  }
+
+  // Handle Drag Over
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  // Handle Drag Leave
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  // Handle File Drop
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    if (event.dataTransfer?.files) {
+      this.processFiles(event.dataTransfer.files);
+    }
+  }
+
+  // Handle File Selection
+  onFileSelected(event: Event, ctrl: any): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.processFiles(input.files);
+    }
+    ctrl.markAsTouched();
+  }
+
+  // Process Selected Files
+  processFiles(files: FileList): void {
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
+      const imageInfo = { src: '', isLoading: true };
+
+      reader.onload = () => {
+        imageInfo.src = reader.result as string;
+        imageInfo.isLoading = false;
+      };
+
+      reader.readAsDataURL(file);
+      this.selectedImage = imageInfo;
+      this.createForm.controls['imageUrl'].setValue(file);
+    });
+  }
+
+  // Remove Image
+  removeImage(event: Event): void {
+    event.stopPropagation();
+    console.log('Remove image clicked');
+    this.selectedImage.src = null;
+    this.createForm.controls['imageUrl'].setValue('');
   }
 }

@@ -6,3 +6,43 @@
     margin-right: 15px;
   }
 }
+
+.image-upload {
+  border: 1px dashed #a69ea4;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+}
+
+.drop-zone:hover {
+  opacity: 0.8;
+}
+
+.no-image {
+  border-color: #e55757;
+}
+
+.image-container {
+  padding-top: 10px;
+  position: relative;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.delete-image {
+  cursor: pointer;
+  color: red;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
