@@ -195,6 +195,7 @@ export class CardsComponent implements OnInit {
     }
     this.currentPage = page;
     this.filterStocks(this.planName, page, false); // Fetch the new page data
+    window.scrollTo(0, 0);
   }
 
   // Update the visible pages in the pagination to always show 3 pages
