@@ -30,7 +30,7 @@ export class DefaultLayoutComponent{
   filterNavItems(page: any, filter: any) {
     const isAdmin = this.authService.isAdmin(); // Check admin status
     this.navItems = this.navItems
-      .filter(item => isAdmin ? item.name !== 'Cards' : item.name !== 'Admin');
+      .filter(item => isAdmin ? item.name !== 'Stocks' : item.name !== 'Admin');
     if (isAdmin) {
       this.router.navigate(['/admin'], { queryParams: { page: page, filter: filter } })
     } else {
