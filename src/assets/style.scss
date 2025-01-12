@@ -1,3 +1,9 @@
+@import "variables";
+
+.default-color {
+  color: $theme-color;
+}
+
 .pointer-cursor {
   cursor: pointer;
 }

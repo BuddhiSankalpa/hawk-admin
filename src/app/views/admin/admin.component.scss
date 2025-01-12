@@ -1,3 +1,5 @@
+@import "variables";
+
 .tab-style {
   border: 1px solid lightgray;
   border-top: none;
@@ -22,13 +24,13 @@
 
 .custom-select {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 16px;
   color: white;
   cursor: pointer;
-  background-color: #3c4b64;
+  background-color: $theme-color;
   border: 1px solid lightgray;
-  padding: 2px 5px;
+  padding: 8px 10px;
   transition: opacity 0.3s ease;
 
   &:focus {
@@ -72,6 +74,7 @@
   .custom-select {
     font-size: 16px;
     padding: 2px;
+    border-radius: 10px;
   }
 }
 

@@ -213,9 +213,11 @@
     </c-row>
 
     <c-row class="mb-1">
-      <label [sm]="3" cCol cLabel="col" for="buyZone" class="label-style">
-        <svg cIcon name="cilChevronCircleRightAlt" size="sm" title="Numbered List Icon"></svg>
-        Image
+      <label [sm]="3" cCol cLabel="col" for="upload">
+        <label  class="label-style">
+          <svg cIcon name="cilChevronCircleRightAlt" size="sm" title="Numbered List Icon"></svg>
+          Image
+        </label>
       </label>
       <c-col *ngIf="createForm.controls['imageUrl'] as ctrl" [sm]="9">
         <div id="imageUpload">
@@ -242,7 +244,7 @@
                          cIcon name="cilTrash" size="xl">
                     </svg>
                   </span>
-                  <img [src]="selectedImage?.src" alt="Selected Image" draggable="false">
+                  <img [src]="selectedImage.src" alt="Selected Image" draggable="false">
                 </div>
               </div>
 
@@ -257,6 +259,7 @@
                 <input
                   #upload
                   (change)="onFileSelected($event, ctrl)"
+                  [disabled]="selectedImage.src"
                   accept="image/*"
                   class="hidden-file-input"
                   id="upload"
@@ -279,10 +282,10 @@
 
 
     <div class="d-flex justify-content-end">
-      <button cButton type="submit"
+      <button type="submit"
               [disabled]="!createForm.valid"
               [ladda]="submitted"
-              class="btn btn-primary mt-2 ps-4 pe-4">
+              class="default-btn">
         Create
       </button>
     </div>

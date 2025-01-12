@@ -1,0 +1,15 @@
+@import "variables";
+
+.signup {
+  background-color: $theme-color;
+  color: white;
+}
+
+.forget-password {
+  color: $theme-color;
+  cursor: pointer;
+
+  &:hover {
+    color: darken($theme-color, 10%);
+  }
+}
