@@ -6,8 +6,8 @@
           <c-card class="p-4">
             <c-card-body>
               <form cForm [formGroup]="loginForm" (submit)="login()">
-                <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your Hawk account</p>
+                <h1 class="default-color">Login</h1>
+                <p class="default-color">Sign In to your Hawk account</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
@@ -38,20 +38,20 @@
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton color="primary" type="submit" [disabled]="!loginForm.valid" [ladda]="isLogin">
+                    <button class="default-btn" type="submit" [disabled]="!loginForm.valid" [ladda]="isLogin">
                       Login
                     </button>
                   </c-col>
-                  <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link" routerLink="/forget-password">
+                  <c-col class="text-right d-flex align-items-center" xs="6">
+                    <div class="px-0 forget-password" routerLink="/forget-password">
                       Forgot password?
-                    </button>
+                    </div>
                   </c-col>
                 </c-row>
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'width.%': 100}" class="text-white bg-primary py-2">
+          <c-card [ngStyle]="{'width.%': 100}" class="signup py-2">
             <c-card-body class="text-center">
               <div>
                 <h2>Sign up</h2>

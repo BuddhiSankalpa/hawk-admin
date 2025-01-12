@@ -5,7 +5,7 @@
         <c-card class="mx-4">
           <c-card-body class="p-4 pt-2 pb-2">
             <form cForm [formGroup]="registerForm" (submit)="register()">
-              <h2>Register</h2>
+              <h2 class="default-color">Register</h2>
               <p class="text-medium-emphasis mb-2">Create your account</p>
               <c-row class="mb-1">
                 <label [sm]="4" cCol cLabel="col" for="firstName">First name</label>
@@ -127,12 +127,12 @@
                 <c-col *ngIf="registerForm.controls['city'] as ctrl" [sm]="8">
                   <input
                     [valid]="
-              ctrl.touched && ctrl.valid
-                ? true
-                : (submitted || ctrl.touched) && ctrl.invalid
-                ? false
-                : undefined
-            "
+                              ctrl.touched && ctrl.valid
+                                ? true
+                                : (submitted || ctrl.touched) && ctrl.invalid
+                                ? false
+                                : undefined
+                            "
                     autocomplete="on"
                     cFormControl
                     formControlName="city"
@@ -240,8 +240,11 @@
                 </c-col>
               </c-row>
 
-              <div class="d-grid p-3">
-                <button cButton color="success"
+              <div class="d-flex gap-2 pt-2">
+                <button routerLink="/login" class="back-btn" style="flex: 1">
+                  Back
+                </button>
+                <button class="default-btn" style="flex: 1"
                         [ladda]="submitted"
                         [disabled]="registerForm.invalid"
                         type="submit">
