@@ -53,7 +53,7 @@ export class OtpComponent implements OnInit{
         next: value => {
           if (value?.statusCode === 200) {
             this.toastr.success('OTP verified successfully!', 'Success');
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/login']);
           } else {
             this.toastr.error('Something went wrong. Please try again later.');
           }
