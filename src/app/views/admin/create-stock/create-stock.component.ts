@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, isFormGroup, Validators} from "@angular/forms";
 import {ValidationFormsService} from "../../../service/validation-forms.service";
 import {ApiService} from "../../../service/api.service";
 import {finalize} from "rxjs";
@@ -41,6 +41,7 @@ export class CreateStockComponent {
         sellTarget: ['', [Validators.required]],
         buyZone: ['', [Validators.required]],
         imageUrl: ['', [Validators.required]],
+        customFields: this.formBuilder.array([]),
       }
     );
     this.formControls = Object.keys(this.createForm.controls);
@@ -123,5 +124,28 @@ export class CreateStockComponent {
     console.log('Remove image clicked');
     this.selectedImage.src = null;
     this.createForm.controls['imageUrl'].setValue('');
+  }
+
+  createCustomField() {
+    return this.formBuilder.group({
+      key: ['', Validators.required],
+      value: ['', Validators.required]
+    });
+  }
+
+  addCustomField() {
+    const fieldArray = this.createForm.get('customFields') as FormArray;
+    if (fieldArray.length < 5 ) {
+      fieldArray.push(this.createCustomField())
+    }
+  }
+
+  removeCustomField(index: number) {
+    const fieldArray = this.createForm.get('customFields') as FormArray;
+      fieldArray.removeAt(index);
+  }
+
+  get customFields() {
+    return (this.createForm.get('customFields') as FormArray).controls;
   }
 }

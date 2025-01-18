@@ -1,4 +1,4 @@
-<div class="ps-5 pe-5">
+<div class="create-stock">
   <form cForm [formGroup]="createForm" (submit)="createStock()">
     <c-row class="mb-1">
       <label [sm]="3" cCol cLabel="col" for="name" class="label-style">
@@ -211,7 +211,6 @@
         </c-form-feedback>
       </c-col>
     </c-row>
-
     <c-row class="mb-1">
       <label [sm]="3" cCol cLabel="col" for="upload">
         <label  class="label-style">
@@ -280,6 +279,89 @@
       </c-col>
     </c-row>
 
+    <!-- Dynamic Fields Section -->
+    <div formArrayName="customFields" class="mt-2 mb-2">
+      <h5>Add custom fields</h5>
+      <div *ngFor="let field of customFields; let i = index;" [formGroupName]="i" class="mb-1">
+        <div class="mb-1 d-flex gap-2">
+          <div class="flex-grow-1">
+            <input
+              [valid]="
+              field.get('key')?.touched && field.get('key')?.valid
+                ? true
+                : (submitted || field.get('key')?.touched) && field.get('key')?.invalid
+                ? false
+                : undefined
+            "
+              cFormControl
+              formControlName="key"
+              placeholder="Field name"
+              type="text"
+              class="form-control"
+            />
+            <c-form-feedback *ngIf="submitted || field?.get('key')?.invalid" [valid]="!(submitted || field?.get('key')?.invalid)">
+              <ng-container *ngIf="field.get('key')?.errors as errors">
+                <div *ngIf="errors['required']">
+                  {{ formErrors.key.required }}
+                </div>
+              </ng-container>
+            </c-form-feedback>
+          </div>
+          <div class="flex-grow-1">
+              <input
+                [valid]="
+              field.get('value')?.touched && field.get('value')?.valid
+                ? true
+                : (submitted || field.get('value')?.touched) && field.get('value')?.invalid
+                ? false
+                : undefined
+            "
+                cFormControl
+                formControlName="value"
+                placeholder="Enter value"
+                class="form-control"
+                required
+              />
+            <c-form-feedback *ngIf="submitted || field.get('value')?.invalid" [valid]="!(submitted || field.get('value')?.invalid)">
+              <ng-container *ngIf="field.get('value')?.errors as errors">
+                <div *ngIf="errors['required']">
+                  {{ formErrors.value.required }}
+                </div>
+              </ng-container>
+            </c-form-feedback>
+          </div>
+          <div style="width: 20px">
+            <div class="custom-icon" (click)="removeCustomField(i)">
+              <svg size="xl"
+                   class="delete-image material-symbols-outlined icon icon-xl"
+                   viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                   pointer-events="none" role="img">
+                <path fill="var(--ci-primary-color, currentColor)"
+                      d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"
+                      class="ci-primary"></path>
+                <rect width="32" height="200" x="168" y="216" fill="var(--ci-primary-color, currentColor)"
+                      class="ci-primary"></rect>
+                <rect width="32" height="200" x="240" y="216" fill="var(--ci-primary-color, currentColor)"
+                      class="ci-primary"></rect>
+                <rect width="32" height="200" x="312" y="216" fill="var(--ci-primary-color, currentColor)"
+                      class="ci-primary"></rect>
+                <path fill="var(--ci-primary-color, currentColor)"
+                      d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"
+                      class="ci-primary"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <button *ngIf="customFields.length < 5" type="button"
+              class="default-btn reset-btn"
+              (click)="addCustomField()"
+              [disabled]="customFields.length > 0 && createForm.get('customFields')?.invalid">
+        Add Fields
+      </button>
+
+    </div>
 
     <div class="d-flex justify-content-end">
       <button type="submit"

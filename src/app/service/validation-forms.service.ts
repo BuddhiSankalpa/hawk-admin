@@ -87,6 +87,12 @@ export class ValidationFormsService {
       image: {
         required: 'Image is required'
       },
+      key: {
+        required: 'Field name is required'
+      },
+      value: {
+        required: 'Field value is required'
+      },
     };
   }
 }
