@@ -21,15 +21,15 @@ export class CardsComponent implements OnInit {
   userStocks: any = Array(10).fill(null);
   plans: any = [
     {
-      id: 'ef8694bef9b17e80387030b9a98aabe2',
+      id: silver_plan_id,
       name: 'silver'
     },
     {
-      id: 'cf42336ada883ec8168b4c346ad24487',
+      id: gold_plan_id,
       name: 'gold'
     },
     {
-      id: '32946927ec96fc23cf90acd305fc493d',
+      id: platinum_plan_id,
       name: 'platinum'
     }
   ];

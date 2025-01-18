@@ -22,6 +22,9 @@ $enable-rtl: true;
 // If you want to add something do it here
 @import "custom";
 
+.error-red{
+  color: #e55757;
+}
 
 .non-selectable {
   user-select: none;
@@ -90,5 +93,27 @@ $enable-rtl: true;
   &:hover {
     background-color: darken(gray, 10%); // Darker shade on hover
     box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+.default-remove-btn {
+  background-color: $error-red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:not(:disabled):hover {
+    background-color: ($error-red, 10%);
+    box-shadow: 0 0 3px 5px rgba(200, 3, 3, 0.2);
   }
 }
