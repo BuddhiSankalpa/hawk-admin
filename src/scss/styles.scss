@@ -63,6 +63,7 @@ $enable-rtl: true;
   font-weight: 600;
   transition: all 0.3s ease; // Smooth transition for hover effects
   cursor: pointer;
+  user-select: none;
 
   &:disabled {
     cursor: not-allowed;
